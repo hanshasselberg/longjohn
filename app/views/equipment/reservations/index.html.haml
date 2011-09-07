@@ -1,4 +1,16 @@
-.container
-  %h1 Equipment Reservation
+.page-header
+  %h1
+    Equipment Reservation
+    %small You can create new and view existing equipment reservations here.
+%br
+%form{action: new_equipment_reservation_path, method: :get}
+  .inline-inputs
+    Name
+    %input#name{type: 'text', name: 'reservation[name]'}
+    from
+    %input.medium{:type => "text", name: 'reservation[from]', value: '1.1.2011 11:11'}
+    to
+    %input.medium{:type => "text", name: 'reservation[to]', value: '3.1.2011 11:11'}
+    %input.btn.primary{type: 'submit', value: 'Proceed'}
 
-  Hallo Hans
+%h4 Existing Reservations
