@@ -7,4 +7,18 @@
     = csrf_meta_tags
   %body
     = render partial: 'layouts/navigation'
-    = yield
+    - if params[:controller] != 'start'
+      .container
+        - if flash[:notice].present?
+          .alert-message.success
+            %p
+              %strong= flash[:notice][0]
+              = flash[:notice][1]
+        - if flash[:alert].present?
+          .alert-message.error
+            %p
+              %strong= flash[:alert][0]
+              = flash[:alert][1]
+        = yield
+    - else
+      = yield
