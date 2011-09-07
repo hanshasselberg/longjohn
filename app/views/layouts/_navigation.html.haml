@@ -1,0 +1,30 @@
+.topbar
+  .topbar-inner
+    .container
+      %h3
+        %a Longjohn
+      %ul.nav
+        %li.active
+          = link_to "Home", root_path
+        %li
+          %a Studio
+        %li.dropdown
+          %a.dropdown-toggle Equipment
+          %ul.dropdown-menu
+            %li
+              %a Reservation
+            %li
+              %a Pick up
+            %li
+              %a Return
+        %li
+          %a Projects
+      %ul.nav.secondary-nav
+        - if current_user
+          %li
+            %a= current_user.email
+        - else
+          %li
+            = link_to "Log in", log_in_path
+          %li
+            = link_to "Sign up", sign_up_path
