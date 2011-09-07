@@ -26,6 +26,8 @@
         - if current_user
           %li
             %a{href: '#'}= current_user.email
+          %li
+            = link_to "Log out", log_out_path
         - else
           %li
             = link_to "Log in", log_in_path
