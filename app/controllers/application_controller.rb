@@ -8,4 +8,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def requires_login
+    redirect_to log_in_path unless current_user
+  end
 end

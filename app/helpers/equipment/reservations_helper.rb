@@ -1,0 +1,2 @@
+module Equipment::ReservationsHelper
+end
