@@ -3,7 +3,18 @@
     New Equipment Reservation
     %small Please add the equipment you need.
 
-%table.zebra-striped
+%br
+%form
+  .inline-inputs
+    Name
+    %input#name{type: 'text', name: 'reservation[name]', value: params[:reservation][:name], disabled: true}
+    from
+    %input.medium{:type => "text", name: 'reservation[from]', value: params[:reservation][:from], disabled: true}
+    to
+    %input.medium{:type => "text", name: 'reservation[to]', value: params[:reservation][:to], disabled: true}
+
+
+%table#devices
   %thead
     %tr
       %th Count
@@ -11,19 +22,3 @@
       %th Company
       %th Kind
   %tbody
-    %tr
-      %td.input
-        %select.mini
-          %option 1
-          %option 2
-      %td 1
-      %td Some
-      %td One
-    %tr
-      %td.input
-        %select.mini
-          %option 1
-          %option 2
-      %td 1
-      %td Some
-      %td One
