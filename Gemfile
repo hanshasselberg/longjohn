@@ -28,6 +28,10 @@ gem 'twitter-bootstrap-rails',
 # Deploy with Capistrano
 gem 'capistrano'
 
+# authentification
+gem "bcrypt-ruby", :require => "bcrypt"
+gem "simple_form"
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 

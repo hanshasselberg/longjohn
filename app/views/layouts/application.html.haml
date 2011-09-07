@@ -10,12 +10,31 @@
       .topbar-inner
         .container
           %h3
-            %a Nav
+            %a UDK
           %ul.nav
+            %li.active
+              %a Home
             %li
               %a Studio
-            %li
-              %a Equipment
+            %li.dropdown
+              %a.dropdown-toggle Equipment
+              %ul.dropdown-menu
+                %li
+                  %a Reservation
+                %li
+                  %a Pick up
+                %li
+                  %a Return
             %li
               %a Projects
+    / #user_nav
+    /   - if current_user
+    /     Logged in as #{current_user.email}.
+    /     \#{link_to "Log out", log_out_path}
+    /   - else
+    /     = link_to "Sign up", sign_up_path
+    /     or
+    /     \#{link_to "log in", log_in_path}
+
     = yield
+

@@ -1,0 +1,19 @@
+/ %h1 Sign Up
+/ = simple_form_for @user do |f|
+/   = f.input :email
+/   = f.input :password
+/   = f.button :submit
+
+%form{:action => "/users", :method => "post"}
+  %fieldset
+    %legend Sign up
+    .clearfix
+      %label{for: 'email'} Email
+      .input
+        %input.large#email{type: 'text', name: 'user[email]'}
+    .clearfix
+      %label{for: 'password'} Password
+      .input
+        %input.large#password{type: 'password', name: 'user[password]'}
+    .actions
+      %input.btn.primary{type: 'submit'}
