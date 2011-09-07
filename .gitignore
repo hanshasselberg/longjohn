@@ -4,3 +4,4 @@ log/*.log
 tmp/
 .sass-cache/
 doc/datenbank-digital-hans.csv
+.DS_Store
