@@ -10,6 +10,7 @@ Longjohn::Application.routes.draw do
   root :to => 'start#index'
 
   namespace :equipment do
+    resources :devices, :only => [:index]
     resources :reservations
   end
 
