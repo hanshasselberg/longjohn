@@ -6,6 +6,7 @@ namespace :csv do
       File.open(ENV["file"], "r") do |infile|
         while (line = infile.gets)
           barcode, model, company, kind = line.split(",")[1,4].map(&:strip)
+          next if kind == "Art"
           Device.create(
             barcode: barcode, model: model, company: company, kind: kind
           )
