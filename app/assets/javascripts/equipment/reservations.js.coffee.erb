@@ -3,12 +3,12 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $.ajax({
-    url: "/equipment/models.js",
-    dataType: 'json',
-    success: (models) ->
-      fill_table(models)
-  })
+  # $.ajax({
+  #   url: "/equipment/models.js",
+  #   dataType: 'json',
+  #   success: (models) ->
+  #     fill_table(models)
+  # })
 
   fill_table = (models) ->
     kinds = build_fubar models
@@ -16,13 +16,13 @@ $ ->
       $('#available_models > tbody:last').append(build_kind_row(kind, companies))
 
     # register callbacks
-    $('tr.kind a').click (e) ->
-      #$(".company.#{e.target.id}").toggleClass('hidden')
+    $('tr.kind a').parents('tr').click (e) ->
+      $(e.target).parents('tr').toggleClass('open')
       $(".company.#{e.target.id}").fadeToggle()
       e.preventDefault()
 
-    $('tr.company a').click (e) ->
-      #$(".model.#{e.target.id}").toggleClass('hidden')
+    $('tr.company a').parents('tr').click (e) ->
+      $(e.target).parents('tr').toggleClass('open')
       $(".model.#{e.target.id}").fadeToggle()
       e.preventDefault()
 
@@ -42,12 +42,12 @@ $ ->
     return big
 
   build_kind_row = (kind, companies) ->
-    row = "<tr class='kind'><td></td><td></td><td></td><td><a id='#{classify(kind)}' href='#'>#{kind}</a></td></tr>"
+    row = "<tr height='47px' class='kind'><td><a id='#{classify(kind)}' href='#'>#{kind}</a></td><td></td><td></td><td></td></tr>"
     row += build_company_row(kind, company, models) for company, models of companies
     return row
 
   build_company_row = (kind, company, models) ->
-    row = "<tr class='hidden company #{classify(kind)}'><td></td><td></td><td><a id='#{classify(company)}' href='#'>#{company}</a></td><td>#{kind}</td></tr>"
+    row = "<tr height='47px' class='hidden company #{classify(kind)}'><td>#{kind}</td><td><a id='#{classify(company)}' href='#'>#{company}</a></td><td></td><td></td></tr>"
     row += build_model_row(model) for model in models
     return row
 
@@ -56,12 +56,17 @@ $ ->
     for num in [0..model.total]
       options += "<option>#{num}</option>"
     select = "<select class='mini'>#{options}</select>"
-    row =  "<td>#{select}</td>"
-    row += "<td>#{model.model}</td>"
+    row =  "<td>#{model.kind}</td>"
     row += "<td>#{model.company}</td>"
-    row += "<td>#{model.kind}</td>"
-    return "<tr class='hidden model #{classify(model.kind)} #{classify(model.company)}'>#{row}</tr>"
+    row += "<td>#{model.model}</td>"
+    row += "<td>#{select}</td>"
+    return "<tr height='47px' class='hidden model #{classify(model.kind)} #{classify(model.company)}'>#{row}</tr>"
 
   classify = (str) ->
     return str.toLowerCase().trim().replace /\W/gi, '_'
+
+  <% require 'generate_models' %>
+  models = <%= GenerateModels.process(Device.all).to_json %>
+  fill_table(models)
+
 
