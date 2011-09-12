@@ -10,14 +10,14 @@ $ ->
       $('#available_models > tbody:last').append(build_kind_row(kind, companies))
 
     # register callbacks
-    $('tr.kind a').parents('tr').click (e) ->
-      $(e.target).parents('tr').toggleClass('open')
-      $(".company.#{e.target.id}").fadeToggle()
+    $('tr.kind').click (e) ->
+      $(e.currentTarget).toggleClass('open')
+      $(".company.#{e.currentTarget.id}").fadeToggle()
       e.preventDefault()
 
-    $('tr.company a').parents('tr').click (e) ->
-      $(e.target).parents('tr').toggleClass('open')
-      $(".model.#{e.target.id}").fadeToggle()
+    $('tr.company').click (e) ->
+      $(e.currentTarget).toggleClass('open')
+      $(".model.#{e.currentTarget.id}").fadeToggle()
       e.preventDefault()
 
   build_fubar = (models) ->
@@ -36,12 +36,12 @@ $ ->
     return big
 
   build_kind_row = (kind, companies) ->
-    row = "<tr height='47px' class='kind'><td><a id='#{classify(kind)}' href='#'>#{kind}</a></td><td></td><td></td><td></td></tr>"
+    row = "<tr id='#{classify(kind)}' height='47px' class='kind'><td><a href='#'>#{kind}</a></td><td></td><td></td><td></td></tr>"
     row += build_company_row(kind, company, models) for company, models of companies
     return row
 
   build_company_row = (kind, company, models) ->
-    row = "<tr height='47px' class='hidden company #{classify(kind)}'><td>#{kind}</td><td><a id='#{classify(company)}' href='#'>#{company}</a></td><td></td><td></td></tr>"
+    row = "<tr id='#{classify(company)}' height='47px' class='hidden company #{classify(kind)}'><td>#{kind}</td><td><a href='#'>#{company}</a></td><td></td><td></td></tr>"
     row += build_model_row(model) for model in models
     return row
 
