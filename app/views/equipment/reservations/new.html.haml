@@ -14,23 +14,24 @@
     %input.medium{:type => "text", name: 'reservation[to]', value: params[:reservation][:to], disabled: true}
 
 %h4 Available Devices
+
 %table#available_models
   %thead
     %tr
-      %th Count
-      %th Model
-      %th Company
-      %th Kind
+      %th{width: '15%'} Kind
+      %th{width: '25%'} Company
+      %th{width: '35%'} Model
+      %th{width: '25%'} Count
   %tbody
 
 %h4 Added Devices
 %table#added_models
   %thead
     %tr
-      %th Count
-      %th Model
-      %th Company
-      %th Kind
+      %th{width: '15%'} Kind
+      %th{width: '25%'} Company
+      %th{width: '35%'} Model
+      %th{width: '25%'} Count
   %tbody
 
 %input.btn.primary{type: 'submit'}
