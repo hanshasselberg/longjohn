@@ -4,7 +4,11 @@ class Equipment::ReservationsController < ApplicationController
   def index
   end
 
-  def new
+  def create
+  end
+
+  def create
+    redirect_to equipment_reservations_path, :notice => ["Reserved!", "This Reservation was successfully created."]
   end
 
 end

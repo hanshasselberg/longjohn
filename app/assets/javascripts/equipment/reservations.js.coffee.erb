@@ -49,12 +49,12 @@ $ ->
     options = ''
     for num in [0..model.total]
       options += "<option>#{num}</option>"
-    select = "<select class='mini'>#{options}</select>"
+    select = "<select class='mini' name='#{model.uuid}[count]'>#{options}</select>"
     row =  "<td>#{model.kind}</td>"
     row += "<td>#{model.company}</td>"
     row += "<td>#{model.model}</td>"
     row += "<td>#{select}</td>"
-    return "<tr height='47px' class='hidden model #{classify(model.kind)} #{classify(model.company)}'>#{row}</tr>"
+    return "<tr id='#{models.indexOf(model)}' height='47px' class='hidden model #{classify(model.kind)} #{classify(model.company)}'>#{row}</tr>"
 
   classify = (str) ->
     return str.toLowerCase().trim().replace /\W/gi, '_'
@@ -62,5 +62,29 @@ $ ->
   <% require 'generate_models' %>
   models = <%= GenerateModels.process(Device.all).to_json %>
   fill_table(models)
+
+  $('select').change (e) ->
+    select = $(e.currentTarget)
+    tr = select.parents('tr')
+    id = tr[0].id + '_clone'
+    id_selector = '#' + id
+    if parseInt(select.val()) > 0
+      clone = tr.clone().attr('id', id)
+      $('select', clone).val(select.val())
+      if $(id_selector).length == 0
+        $('#added_models').append clone
+      else
+        $(id_selector).replaceWith clone
+    else
+      $(id_selector).remove()
+
+    return
+
+  $('h4 small a').click (e) ->
+    $('#available_models').toggle()
+    if $('h4 small a').text() == 'hide'
+      $('h4 small a').text('show')
+    else
+      $('h4 small a').text('hide')
 
 

@@ -11,7 +11,8 @@ module GenerateModels
     devices.each do |d|
       next if models[d.model].present?
       models[d.model] = {
-        total: device_count[d.model], model: d.model, company: d.company, kind: d.kind
+        total: device_count[d.model], model: d.model,
+        company: d.company, kind: d.kind, uuid: d._id
       }
     end
 

@@ -13,7 +13,10 @@
     to
     %input.medium{:type => "text", name: 'reservation[to]', value: params[:reservation][:to], disabled: true}
 
-%h4 Available Devices
+%h4
+  Available Devices
+  %small
+    %a{href: '#'} hide
 
 %table#available_models
   %thead
@@ -25,13 +28,17 @@
   %tbody
 
 %h4 Added Devices
-%table#added_models
-  %thead
-    %tr
-      %th{width: '15%'} Kind
-      %th{width: '25%'} Company
-      %th{width: '35%'} Model
-      %th{width: '25%'} Count
-  %tbody
+%form{:action => "/equipment/reservations", :method => "post"}
+  %input{type: 'hidden', name: 'reservation[name]', value: params[:reservation][:name]}
+  %input{type: 'hidden', name: 'reservation[from]', value: params[:reservation][:from]}
+  %input{type: 'hidden', name: 'reservation[to]', value: params[:reservation][:to]}
+  %table#added_models
+    %thead
+      %tr
+        %th{width: '15%'} Kind
+        %th{width: '25%'} Company
+        %th{width: '35%'} Model
+        %th{width: '25%'} Count
+    %tbody
 
-%input.btn.primary{type: 'submit'}
+  %input.btn.primary{type: 'submit'}
