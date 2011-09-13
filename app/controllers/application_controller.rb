@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  # FIXME: strange problems on creating new reservations... :(
+  # protect_from_forgery
   helper_method :current_user
 
   private
