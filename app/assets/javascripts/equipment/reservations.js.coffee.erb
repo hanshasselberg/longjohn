@@ -49,7 +49,7 @@ $ ->
     options = ''
     for num in [0..model.total]
       options += "<option>#{num}</option>"
-    select = "<select class='mini' name='#{model.uuid}[count]'>#{options}</select>"
+    select = "<select class='mini' name='reservation[element_uuids][#{model.uuid}]'>#{options}</select>"
     row =  "<td>#{model.kind}</td>"
     row += "<td>#{model.company}</td>"
     row += "<td>#{model.model}</td>"

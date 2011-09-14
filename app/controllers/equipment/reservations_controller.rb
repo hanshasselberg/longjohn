@@ -8,7 +8,12 @@ class Equipment::ReservationsController < ApplicationController
   end
 
   def create
-    redirect_to equipment_reservations_path, :notice => ["Reserved!", "This Reservation was successfully created."]
+    if EquipmentReservation.create params[:reservation].merge({user: current_user._id})
+      redirect_to equipment_reservations_path, notice: [
+        "Reserved!", "This Reservation was successfully created."]
+    else
+      render 'new', notice: [ "Oops!", "Something went wrong."]
+    end
   end
 
 end
