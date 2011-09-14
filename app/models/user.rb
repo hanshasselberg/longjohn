@@ -33,4 +33,8 @@ class User
     end
   end
 
+  def equipment_reservations
+    EquipmentReservation.where(user: _id)
+  end
+
 end

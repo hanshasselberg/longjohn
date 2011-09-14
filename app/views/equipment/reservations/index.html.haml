@@ -13,4 +13,18 @@
     %input.medium{:type => "text", name: 'reservation[to]', value: '3.1.2011 11:11'}
     %input.btn.primary{type: 'submit', value: 'Proceed'}
 
-%h4 Existing Reservations
+%h4
+  Future Reservations
+
+%table
+  %thead
+    %tr
+      %th{width: '60%'} Name
+      %th{width: '20%'} From
+      %th{width: '20%'} To
+  %tbody
+    - current_user.equipment_reservations.sort_by{ |r| r.from }.each do |r|
+      %tr
+        %td= r.name
+        %td= l r.from.in_time_zone("Berlin"), :format => :short
+        %td= l r.to.in_time_zone("Berlin"), :format => :short
