@@ -31,6 +31,7 @@ gem 'capistrano'
 # authentification
 gem "bcrypt-ruby", :require => "bcrypt"
 gem "simple_form"
+gem 'rails-i18n'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
