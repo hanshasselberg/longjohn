@@ -1,17 +1,18 @@
+- controller = params[:controller]
 .topbar
   .topbar-inner
     .container
       %h3
         %a Longjohn
       %ul.nav
-        %li.active
+        %li{class: "#{'active' if controller == 'start'}"}
           = link_to "Home", root_path
-        %li.dropdown
+        %li.dropdown{class: "#{'active' if controller =~ /studio/}"}
           %a.dropdown-toggle{href: '#'} Studio
           %ul.dropdown-menu
             %li
               %a{href: '#'} Reservation
-        %li.dropdown
+        %li.dropdown{class: "#{'active' if controller =~ /equipment/}"}
           %a.dropdown-toggle{href: '#'} Equipment
           %ul.dropdown-menu
             %li
