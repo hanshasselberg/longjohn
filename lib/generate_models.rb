@@ -7,7 +7,7 @@ module GenerateModels
     device_count = {}
     devices.each do |d|
       key = "#{d.kind}_#{d.company}_#{d.model}"
-      device_count[key] ||= {total: 0, available: 0}
+      device_count[key] ||= {total: 0, available: 0, :users = []}
       device_count[key][:total] += 1
       device_count[key][:available] += 1
     end
@@ -19,12 +19,8 @@ module GenerateModels
       # or end is inside
       EquipmentReservation.where(:to.gte => from, :to.lt => to)
     ).uniq.map(&:reservations).flatten.each do |r|
-      p r.inspect
       key = "#{r['kind']}_#{r['company']}_#{r['model']}"
-      p device_count[key].inspect
       device_count[key][:available] -= r['count'].to_i
-      p device_count[key].inspect
-      p '-------'
     end
 
 
