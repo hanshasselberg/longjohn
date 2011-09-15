@@ -4,14 +4,21 @@
 
 $ ->
 
-  # register callbacks
-  $('tr').click (e) ->
+  $('tr.kind').click (e) ->
     tr = $(e.currentTarget)
     tr.toggleClass('open')
-    classes = tr[0].className.replace('open', '').trim().replace(' ', '.')
-    $('.'+classes).fadeToggle()
-    # e.preventDefault()
+    if tr.hasClass('open')
+      $(".company.#{tr[0].id}").fadeIn()
+    else
+      $(".#{tr[0].id}").fadeOut()
+      $(".#{tr[0].id}").removeClass('open')
+    e.preventDefault()
 
+  $('tr.company').click (e) ->
+    tr = $(e.currentTarget)
+    tr.toggleClass('open')
+    $(".model.#{tr[0].id}").fadeToggle()
+    e.preventDefault()
 
   $('select').change (e) ->
     select = $(e.currentTarget)
@@ -20,15 +27,13 @@ $ ->
     id_selector = '#' + id
     if parseInt(select.val()) > 0
       clone = tr.clone().attr('id', id)
-      $('select', clone).val(select.val())
+      $('select', clone).val(select.val()).attr('disabled', 'true');
       if $(id_selector).length == 0
         $('#added_models').append clone
       else
         $(id_selector).replaceWith clone
     else
       $(id_selector).remove()
-
-    return
 
   $('h4 small a').click (e) ->
     $('#available_models').toggle()

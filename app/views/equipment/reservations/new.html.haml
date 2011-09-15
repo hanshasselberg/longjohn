@@ -27,21 +27,21 @@
       %th{width: '25%'} Count
   %tbody
     - @models.each do |kind, companies|
-      %tr{ id: classify(kind), class: classify(kind), height: '47px' }
+      %tr.kind{ id: classify(kind), height: '47px' }
         %td
           %a{href: '#'}= kind
         %td
         %td
         %td
       - companies.each do |company, models|
-        %tr{ class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
+        %tr.company{ id: classify(company), class: classify(kind), height: '47px', style: 'display:none' }
           %td= kind
           %td
             %a{href: '#'}= company
           %td
           %td
         - models.each do |model|
-          %tr{ id: model[:uuid], height: '47px', style: 'display:none' }
+          %tr.model{ id: model[:uuid], class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
             %td= kind
             %td= company
             %td= model[:model]
