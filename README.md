@@ -12,3 +12,4 @@ Longjohn is a Equipment and Studio management software from Hans for the Udk
 ## Todo
 
  * unify forms and create custom form builder
+ * fix in\_time\_zone and strftime
