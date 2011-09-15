@@ -13,48 +13,51 @@
     to
     %input.medium{:type => "text", value: params[:reservation][:to], disabled: true}
 
-%h4
-  Available Devices
-  %small
-    %a{href: '#'} hide
 
-%table#available_models
-  %thead
-    %tr
-      %th{width: '15%'} Kind
-      %th{width: '25%'} Company
-      %th{width: '35%'} Model
-      %th{width: '25%'} Count
-  %tbody
-    - @models.each do |kind, companies|
-      %tr.kind{ id: classify(kind), height: '47px' }
-        %td
-          %a{href: '#'}= kind
-        %td
-        %td
-        %td
-      - companies.each do |company, models|
-        %tr.company{ id: classify(company), class: classify(kind), height: '47px', style: 'display:none' }
-          %td= kind
-          %td
-            %a{href: '#'}= company
-          %td
-          %td
-        - models.each do |model|
-          %tr.model{ id: model[:uuid], class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
-            %td= kind
-            %td= company
-            %td= model[:model]
-            %td
-              %select.mini{ name: "reservation[element_uuids][#{model[:uuid]}]"}
-                - (0..model[:total]).each do |i|
-                  %option= i
 
-%h4 Added Devices
-%form{:action => "/equipment/reservations", :method => "post"}
+%form#new_reservation{:action => "/equipment/reservations", :method => "post"}
   %input{type: 'hidden', name: 'reservation[name]', value: params[:reservation][:name]}
   %input{type: 'hidden', name: 'reservation[from]', value: params[:reservation][:from]}
   %input{type: 'hidden', name: 'reservation[to]', value: params[:reservation][:to]}
+
+  %h4
+    Available Devices
+    %small
+      %a{href: '#'} hide
+
+  %table#available_models
+    %thead
+      %tr
+        %th{width: '15%'} Kind
+        %th{width: '25%'} Company
+        %th{width: '35%'} Model
+        %th{width: '25%'} Count
+    %tbody
+      - @models.each do |kind, companies|
+        %tr.kind{ id: classify(kind), height: '47px' }
+          %td
+            %a{href: '#'}= kind
+          %td
+          %td
+          %td
+        - companies.each do |company, models|
+          %tr.company{ id: classify(company), class: classify(kind), height: '47px', style: 'display:none' }
+            %td= kind
+            %td
+              %a{href: '#'}= company
+            %td
+            %td
+          - models.each do |model|
+            %tr.model{ id: model[:uuid], class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
+              %td= kind
+              %td= company
+              %td= model[:model]
+              %td
+                %select.mini{ name: "reservation[element_uuids][#{model[:uuid]}]"}
+                  - (0..model[:total]).each do |i|
+                    %option{disabled: i > model[:available]}= i
+
+  %h4 Added Devices
   %table#added_models
     %thead
       %tr
@@ -64,4 +67,5 @@
         %th{width: '25%'} Count
     %tbody
 
-  %input.btn.primary{type: 'submit'}
+  %input.btn.primary{ type: 'submit' }
+  %a.btn.reset{href: equipment_reservations_path} Cancel
