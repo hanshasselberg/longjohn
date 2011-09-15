@@ -27,7 +27,7 @@ $ ->
     id_selector = '#' + id
     if parseInt(select.val()) > 0
       clone = tr.clone().attr('id', id)
-      $('select', clone).val(select.val()).attr('disabled', 'true');
+      $('select', clone).val(select.val())#.attr('disabled', 'true');
       if $(id_selector).length == 0
         $('#added_models').append clone
       else
