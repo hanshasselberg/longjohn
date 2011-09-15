@@ -12,6 +12,3 @@ Longjohn is a Equipment and Studio management software from Hans for the Udk
 ## Todo
 
  * unify forms and create custom form builder
- * update active button in navigation
- * new reservation: hide companies and models when clicking on kind
- * clean up class, id and js hell in new reservation
