@@ -6,7 +6,7 @@
 %form{action: new_equipment_reservation_path, method: :get}
   .inline-inputs
     Name
-    %input#name{type: 'text', name: 'reservation[name]'}
+    %input{type: 'text', name: 'reservation[name]'}
     from
     %input.medium{:type => "text", name: 'reservation[from]', value: '1.1.2011 11:11'}
     to

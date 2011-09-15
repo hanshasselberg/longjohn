@@ -7,11 +7,11 @@
 %form
   .inline-inputs
     Name
-    %input#name{type: 'text', name: 'reservation[name]', value: params[:reservation][:name], disabled: true}
+    %input{type: 'text', value: params[:reservation][:name], disabled: true}
     from
-    %input.medium{:type => "text", name: 'reservation[from]', value: params[:reservation][:from], disabled: true}
+    %input.medium{:type => "text", value: params[:reservation][:from], disabled: true}
     to
-    %input.medium{:type => "text", name: 'reservation[to]', value: params[:reservation][:to], disabled: true}
+    %input.medium{:type => "text", value: params[:reservation][:to], disabled: true}
 
 %h4
   Available Devices
@@ -26,6 +26,29 @@
       %th{width: '35%'} Model
       %th{width: '25%'} Count
   %tbody
+    - @models.each do |kind, companies|
+      %tr{ id: classify(kind), class: classify(kind), height: '47px' }
+        %td
+          %a{href: '#'}= kind
+        %td
+        %td
+        %td
+      - companies.each do |company, models|
+        %tr{ class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
+          %td= kind
+          %td
+            %a{href: '#'}= company
+          %td
+          %td
+        - models.each do |model|
+          %tr{ id: model[:uuid], height: '47px', style: 'display:none' }
+            %td= kind
+            %td= company
+            %td= model[:model]
+            %td
+              %select.mini{ name: "reservation[element_uuids][#{model[:uuid]}]"}
+                - (0..model[:total]).each do |i|
+                  %option= i
 
 %h4 Added Devices
 %form{:action => "/equipment/reservations", :method => "post"}

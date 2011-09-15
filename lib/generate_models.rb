@@ -16,7 +16,19 @@ module GenerateModels
       }
     end
 
-    models.values
+    models = models.values
+    fubar = {}
+    kinds = models.uniq{|e| e[:kind]}.map{|e| e[:kind]}.sort
+    kinds.each do |kind|
+      fubar[kind] = {}
+      companies = models.select{ |e| e[:kind] == kind }
+        .uniq{|e| e[:company]}.map{|e| e[:company]}.sort
+      companies.each do |company|
+        fubar[kind][company] = models
+          .select{ |e| e[:kind] == kind && e[:company] == company }
+      end
+    end
+    fubar
 
   end
 

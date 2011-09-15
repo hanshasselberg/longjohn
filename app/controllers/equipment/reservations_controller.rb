@@ -1,10 +1,10 @@
+require_dependency 'generate_models'
+
 class Equipment::ReservationsController < ApplicationController
   before_filter :requires_login
 
-  def index
-  end
-
-  def create
+  def new
+    @models = GenerateModels.process Device.all
   end
 
   def create

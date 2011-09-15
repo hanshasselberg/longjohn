@@ -1,67 +1,17 @@
-# Place all the behaviors and hooks related to the matching contdoller here.
+# Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
 
-  fill_table = (models) ->
-    kinds = build_fubar models
-    for kind, companies of kinds
-      $('#available_models > tbody:last').append(build_kind_row(kind, companies))
+  # register callbacks
+  $('tr').click (e) ->
+    tr = $(e.currentTarget)
+    tr.toggleClass('open')
+    classes = tr[0].className.replace('open', '').trim().replace(' ', '.')
+    $('.'+classes).fadeToggle()
+    # e.preventDefault()
 
-    # register callbacks
-    $('tr.kind').click (e) ->
-      $(e.currentTarget).toggleClass('open')
-      $(".company.#{e.currentTarget.id}").fadeToggle()
-      e.preventDefault()
-
-    $('tr.company').click (e) ->
-      $(e.currentTarget).toggleClass('open')
-      $(".model.#{e.currentTarget.id}").fadeToggle()
-      e.preventDefault()
-
-  build_fubar = (models) ->
-    big = {}
-    kinds = []
-    models.forEach (e) -> kinds.push(e.kind) if(kinds.indexOf(e.kind) == -1)
-    kinds.sort().forEach (kind) ->
-      big[kind] = {}
-      companies = []
-      models.filter((model) -> model.kind == kind).forEach (model) ->
-        companies.push(model.company) if(companies.indexOf(model.company) == -1)
-      companies.sort().forEach (company) ->
-        big[kind][company] = models.filter((model) ->
-          model.kind == kind and model.company == company
-        )
-    return big
-
-  build_kind_row = (kind, companies) ->
-    row = "<tr id='#{classify(kind)}' height='47px' class='kind'><td><a href='#'>#{kind}</a></td><td></td><td></td><td></td></tr>"
-    row += build_company_row(kind, company, models) for company, models of companies
-    return row
-
-  build_company_row = (kind, company, models) ->
-    row = "<tr id='#{classify(company)}' height='47px' class='hidden company #{classify(kind)}'><td>#{kind}</td><td><a href='#'>#{company}</a></td><td></td><td></td></tr>"
-    row += build_model_row(model) for model in models
-    return row
-
-  build_model_row = (model) ->
-    options = ''
-    for num in [0..model.total]
-      options += "<option>#{num}</option>"
-    select = "<select class='mini' name='reservation[element_uuids][#{model.uuid}]'>#{options}</select>"
-    row =  "<td>#{model.kind}</td>"
-    row += "<td>#{model.company}</td>"
-    row += "<td>#{model.model}</td>"
-    row += "<td>#{select}</td>"
-    return "<tr id='#{models.indexOf(model)}' height='47px' class='hidden model #{classify(model.kind)} #{classify(model.company)}'>#{row}</tr>"
-
-  classify = (str) ->
-    return str.toLowerCase().trim().replace /\W/gi, '_'
-
-  <% require 'generate_models' %>
-  models = <%= GenerateModels.process(Device.all).to_json %>
-  fill_table(models)
 
   $('select').change (e) ->
     select = $(e.currentTarget)
