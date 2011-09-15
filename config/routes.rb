@@ -8,8 +8,6 @@ Longjohn::Application.routes.draw do
   resources :sessions
 
   namespace :equipment do
-    resources :models, only: [:index]
-    resources :devices, only: [:index]
     resources :reservations
   end
 
