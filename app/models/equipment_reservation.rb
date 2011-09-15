@@ -12,7 +12,7 @@ class EquipmentReservation
       .map{ |device, count|
         {kind: device.kind, company: device.company, model: device.model, count: count}
       }
-    self[:reservations]
+    self[:reservations].flatten!
   end
 
 end
