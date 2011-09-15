@@ -1,6 +1,6 @@
 .page-header
   %h1
-    Show Equipment Reservation
+    Equipment Reservation
     %small Yeah, this is it.
 
 %br
@@ -32,4 +32,5 @@
 %form{:action => "/equipment/reservations/#{@reservation._id}", :method => "post"}
   %input{:name => "_method", :type => "hidden", :value => "delete"}
   %input.btn.danger{type: 'submit', value: 'Destroy'}
+  %a.btn.reset{href: equipment_reservations_path} Back
 
