@@ -16,4 +16,16 @@ class Equipment::ReservationsController < ApplicationController
     end
   end
 
+  def show
+    @reservation = EquipmentReservation.find params[:id]
+    Rails.logger.warn @reservation.inspect
+  end
+
+  def destroy
+    if EquipmentReservation.find(params[:id]).destroy
+      redirect_to equipment_reservations_path, notice: [
+        "Destroyed!", "This Reservation was successfully destroyed."]
+    end
+  end
+
 end

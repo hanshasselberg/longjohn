@@ -25,6 +25,6 @@
   %tbody
     - current_user.equipment_reservations.sort_by{ |r| r.from }.each do |r|
       %tr
-        %td= r.name
+        %td= link_to r.name, r
         %td= l r.from.in_time_zone("Berlin"), :format => :short
         %td= l r.to.in_time_zone("Berlin"), :format => :short
