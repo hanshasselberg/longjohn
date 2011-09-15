@@ -4,7 +4,8 @@ class Equipment::ReservationsController < ApplicationController
   before_filter :requires_login
 
   def new
-    @models = GenerateModels.process Device.all
+    r = EquipmentReservation.new params[:reservation].merge({user: current_user._id})
+    @models = GenerateModels.process r.from, r.to
   end
 
   def create
