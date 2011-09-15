@@ -8,6 +8,7 @@ class EquipmentReservation
 
   def element_uuids= uuids
     self[:reservations] << uuids
+      .reject{ |uuid, count| count == '0' }
       .map{ |uuid, count| [Device.find(uuid), count.to_i] }
       .map{ |device, count|
         {kind: device.kind, company: device.company, model: device.model, count: count}
