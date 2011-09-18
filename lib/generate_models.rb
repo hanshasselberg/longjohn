@@ -19,7 +19,7 @@ module GenerateModels
       # or end is inside
       EquipmentReservation.where(:to.gte => from, :to.lt => to)
     ).uniq.each do |reservation|
-      r.reservations.each do |r|
+      reservation.reservations.each do |r|
         key = "#{r['kind']}_#{r['company']}_#{r['model']}"
         device_count[key][:available] -= r['count'].to_i
         device_count[key][:users] << reservation.user
