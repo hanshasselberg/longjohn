@@ -7,7 +7,7 @@ module GenerateModels
     device_count = {}
     devices.each do |d|
       key = "#{d.kind}_#{d.company}_#{d.model}"
-      device_count[key] ||= {total: 0, available: 0, :users = []}
+      device_count[key] ||= {total: 0, available: 0, users: []}
       device_count[key][:total] += 1
       device_count[key][:available] += 1
     end
@@ -18,9 +18,12 @@ module GenerateModels
       EquipmentReservation.where(:from.gte => from, :from.lt => to) +
       # or end is inside
       EquipmentReservation.where(:to.gte => from, :to.lt => to)
-    ).uniq.map(&:reservations).flatten.each do |r|
-      key = "#{r['kind']}_#{r['company']}_#{r['model']}"
-      device_count[key][:available] -= r['count'].to_i
+    ).uniq.each do |reservation|
+      r.reservations.each do |r|
+        key = "#{r['kind']}_#{r['company']}_#{r['model']}"
+        device_count[key][:available] -= r['count'].to_i
+        device_count[key][:users] << reservation.user
+      end
     end
 
 
@@ -29,10 +32,13 @@ module GenerateModels
     devices.each do |d|
       key = "#{d.kind}_#{d.company}_#{d.model}"
       next if models[key].present?
+      if (available = device_count[key][:available]) < 0
+        available = 0
+      end
       models[key] = {
-        total: device_count[key][:total],
-        available: device_count[key][:available], model: d.model,
-        company: d.company, kind: d.kind, uuid: d._id.to_s
+        total: device_count[key][:total], available: available,
+        model: d.model, company: d.company, kind: d.kind, uuid: d._id.to_s,
+        users: d.users.uniq
       }
     end
 

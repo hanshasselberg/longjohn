@@ -13,8 +13,6 @@
     to
     %input.medium{:type => "text", value: params[:reservation][:to], disabled: true}
 
-
-
 %form#new_reservation{:action => "/equipment/reservations", :method => "post"}
   %input{type: 'hidden', name: 'reservation[name]', value: params[:reservation][:name]}
   %input{type: 'hidden', name: 'reservation[from]', value: params[:reservation][:from]}
