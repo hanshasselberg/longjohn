@@ -38,7 +38,7 @@ module GenerateModels
       models[key] = {
         total: device_count[key][:total], available: available,
         model: d.model, company: d.company, kind: d.kind, uuid: d._id.to_s,
-        users: d.users.uniq
+        users: device_count[key][:users]
       }
     end
 
