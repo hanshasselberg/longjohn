@@ -32,5 +32,6 @@
 %form{:action => "/equipment/reservations/#{@reservation._id}", :method => "post"}
   %input{:name => "_method", :type => "hidden", :value => "delete"}
   %input.btn.danger{type: 'submit', value: 'Destroy'}
+  %a.btn.info{href: equipment_pick_up_path(@reservation)} Pick up
   %a.btn.reset{href: equipment_reservations_path} Back
 
