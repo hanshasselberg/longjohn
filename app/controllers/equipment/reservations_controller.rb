@@ -5,7 +5,7 @@ class Equipment::ReservationsController < ApplicationController
 
   def new
     r = EquipmentReservation.new params[:reservation].merge({user: current_user._id})
-    @models = GenerateModels.process r.from, r.to
+    @models = GenerateModels.for_reservation r.from, r.to
   end
 
   def create

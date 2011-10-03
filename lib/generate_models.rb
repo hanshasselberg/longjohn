@@ -1,6 +1,24 @@
 module GenerateModels
 
-  def self.process from, to
+  def self.for_pick_up
+    devices = Device.all
+
+    models = Hash.new()
+    devices.each do |d|
+      key = "#{classify(d.kind)}_#{classify(d.company)}_#{classify(d.model)}"
+      models[key] = [] if models[key].nil?
+      models[key] << d.barcode
+      models[key].uniq!
+      models[key].compact!
+    end
+    models
+  end
+
+  def self.classify str
+    str.gsub(/\W/, '_').underscore
+  end
+
+  def self.for_reservation from, to
     devices = Device.all
 
     # count how many devices are there per model
