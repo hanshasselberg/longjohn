@@ -52,6 +52,8 @@ GEM
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
     bson (1.5.2)
+    bson_ext (1.5.2)
+      bson (= 1.5.2)
     builder (3.0.0)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -140,6 +142,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby
+  bson_ext (~> 1.5)
   coffee-rails (~> 3.1.0)
   decent_exposure
   haml-rails
