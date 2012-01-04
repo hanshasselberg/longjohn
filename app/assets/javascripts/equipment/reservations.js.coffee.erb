@@ -4,23 +4,25 @@
 
 $ ->
 
-  $('tr.kind').click (e) ->
+  scope = $('#available_models')
+
+  $('tr.kind', scope).click (e) ->
     tr = $(e.currentTarget)
     tr.toggleClass('open')
     if tr.hasClass('open')
-      $(".company.#{tr[0].id}").fadeIn()
+      $(".company.#{tr[0].id}", scope).fadeIn()
     else
-      $(".#{tr[0].id}").fadeOut()
-      $(".#{tr[0].id}").removeClass('open')
+      $(".#{tr[0].id}", scope).fadeOut()
+      $(".#{tr[0].id}", scope).removeClass('open')
     e.preventDefault()
 
-  $('tr.company').click (e) ->
+  $('tr.company', scope).click (e) ->
     tr = $(e.currentTarget)
     tr.toggleClass('open')
-    $(".model.#{tr[0].id}").fadeToggle()
+    $(".model.#{tr[0].id}", scope).fadeToggle()
     e.preventDefault()
 
-  $('select').change (e) ->
+  $('select', scope).change (e) ->
     select = $(e.currentTarget)
     tr = select.parents('tr')
     id = tr[0].id + '_clone'
