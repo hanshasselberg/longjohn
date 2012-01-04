@@ -18,11 +18,11 @@
 %form
   .inline-inputs
     Name
-    %input{type: 'text', value: @reservation.name, disabled: true}
+    %input{type: 'text', value: equipment_reservation.name, disabled: true}
     from
-    %input.medium{:type => "text", value: @reservation.from, disabled: true}
+    %input.medium{:type => "text", value: equipment_reservation.from, disabled: true}
     to
-    %input.medium{:type => "text", value: @reservation.to, disabled: true}
+    %input.medium{:type => "text", value: equipment_reservation.to, disabled: true}
 %br
 %form.scan
   .inline-inputs
@@ -39,8 +39,8 @@
       %th{width: '35%'} Model
       %th{width: '25%'} Count
   %tbody
-    - @reservation.reservations.each do |r|
-      %tr{data: {barcodes: @models[classify("#{r['kind']}_#{r['company']}_#{r['model']}")], picked: [], total: r['count']}}
+    - equipment_reservation.reservations.each do |r|
+      %tr{data: {barcodes: models[classify("#{r['kind']}_#{r['company']}_#{r['model']}")], picked: [], total: r['count']}}
         %td= r['kind']
         %td= r['company']
         %td= r['model']

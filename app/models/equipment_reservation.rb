@@ -6,14 +6,34 @@ class EquipmentReservation
   field :user, type: String
   field :reservations, type: Array, default: []
 
+  attr_reader :uuids
+
   def element_uuids= uuids
-    self[:reservations] << uuids
-      .reject{ |uuid, count| count == '0' }
-      .map{ |uuid, count| [Device.find(uuid), count.to_i] }
-      .map{ |device, count|
-        {kind: device.kind, company: device.company, model: device.model, count: count}
-      }
+    @uuids = uuids
+    self[:reservations] ||= []
+    self[:reservations] << sanititzed_uuids
     self[:reservations].flatten!
+  end
+
+  private
+
+  def sanititzed_uuids
+    remove_zeros!
+    map_devices!
+    generate_reservations
+  end
+
+  def remove_zeros!
+    @uuids.reject!{ |uuid, count| count == '0' }
+  end
+
+  def map_devices!
+    @uuids = @uuids.map{|uuid, count| [Device.find(uuid), count.to_i] }
+    p @uuids.inspect
+  end
+
+  def generate_reservations
+    @uuids.map{ |device, count| {kind: device.kind, company: device.company, model: device.model, count: count} }
   end
 
 end

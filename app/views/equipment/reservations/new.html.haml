@@ -7,16 +7,17 @@
 %form
   .inline-inputs
     Name
-    %input{type: 'text', value: params[:reservation][:name], disabled: true}
+    %input{type: 'text', value: params[:equipment_reservation][:name], disabled: true}
     from
-    %input.medium{:type => "text", value: params[:reservation][:from], disabled: true}
+    %input.medium{:type => "text", value: params[:equipment_reservation][:from], disabled: true}
     to
-    %input.medium{:type => "text", value: params[:reservation][:to], disabled: true}
+    %input.medium{:type => "text", value: params[:equipment_reservation][:to], disabled: true}
 
 %form#new_reservation{:action => "/equipment/reservations", :method => "post"}
-  %input{type: 'hidden', name: 'reservation[name]', value: params[:reservation][:name]}
-  %input{type: 'hidden', name: 'reservation[from]', value: params[:reservation][:from]}
-  %input{type: 'hidden', name: 'reservation[to]', value: params[:reservation][:to]}
+  %input{type: 'hidden', name: 'equipment_reservation[name]', value: params[:equipment_reservation][:name]}
+  %input{type: 'hidden', name: 'equipment_reservation[from]', value: params[:equipment_reservation][:from]}
+  %input{type: 'hidden', name: 'equipment_reservation[to]', value: params[:equipment_reservation][:to]}
+  %input{type: 'hidden', name: 'equipment_reservation[user]', value: current_user._id.to_s}
 
   %h4
     Available Devices
@@ -31,7 +32,7 @@
         %th{width: '35%'} Model
         %th{width: '25%'} Count
     %tbody
-      - @models.each do |kind, companies|
+      - models.each do |kind, companies|
         %tr.kind{ id: classify(kind), height: '47px' }
           %td
             %a{href: '#'}= kind
@@ -51,7 +52,7 @@
               %td= company
               %td= model[:model]
               %td
-                %select.mini{ name: "reservation[element_uuids][#{model[:uuid]}]"}
+                %select.mini{ name: "equipment_reservation[element_uuids][#{model[:uuid]}]"}
                   - (0..model[:total]).each do |i|
                     %option{disabled: i > model[:available]}= i
 

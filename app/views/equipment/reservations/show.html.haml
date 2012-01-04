@@ -7,11 +7,11 @@
 %form
   .inline-inputs
     Name
-    %input{type: 'text', value: @reservation.name, disabled: true}
+    %input{type: 'text', value: equipment_reservation.name, disabled: true}
     from
-    %input.medium{:type => "text", value: @reservation.from.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
+    %input.medium{:type => "text", value: equipment_reservation.from.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
     to
-    %input.medium{:type => "text", value: @reservation.to.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
+    %input.medium{:type => "text", value: equipment_reservation.to.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
 
 %h4 Reserved Devices
 %table
@@ -22,16 +22,17 @@
       %th{width: '35%'} Model
       %th{width: '25%'} Count
   %tbody
-    - @reservation.reservations.each do |model|
+    - equipment_reservation.reservations.each do |model|
       %tr
         %td= model['kind']
         %td= model['company']
         %td= model['model']
         %td= model['count']
 
-%form{:action => "/equipment/reservations/#{@reservation._id}", :method => "post"}
+%form{:action => "/equipment/reservations/#{equipment_reservation._id}", :method => "post"}
   %input{:name => "_method", :type => "hidden", :value => "delete"}
+  %input{:name => "user", :type => "hidden", :value => current_user._id.to_s }
   %input.btn.danger{type: 'submit', value: 'Destroy'}
-  %a.btn.info{href: equipment_pick_up_path(@reservation)} Pick up
+  %a.btn.info{href: equipment_pick_up_path(equipment_reservation)} Pick up
   %a.btn.reset{href: equipment_reservations_path} Back
 

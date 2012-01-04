@@ -6,11 +6,11 @@
 %form{action: new_equipment_reservation_path, method: :get}
   .inline-inputs
     Name
-    %input{type: 'text', name: 'reservation[name]'}
+    %input{type: 'text', name: 'equipment_reservation[name]'}
     from
-    %input.medium{:type => "text", name: 'reservation[from]', value: '1.1.2011 11:11'}
+    %input.medium{:type => "text", name: 'equipment_reservation[from]', value: '1.1.2011 11:11'}
     to
-    %input.medium{:type => "text", name: 'reservation[to]', value: '3.1.2011 11:11'}
+    %input.medium{:type => "text", name: 'equipment_reservation[to]', value: '3.1.2011 11:11'}
     %input.btn.primary{type: 'submit', value: 'Proceed'}
 
 %h4
