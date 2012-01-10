@@ -8,6 +8,10 @@ class EquipmentReservation
 
   attr_reader :uuids
 
+  def self.in(from, to)
+    (where(:from.gte => from, :from.lt => to) + where(:to.gte => from, :to.lt => to)).uniq
+  end
+
   def element_uuids= uuids
     @uuids = uuids
     self[:reservations] ||= []
@@ -29,7 +33,6 @@ class EquipmentReservation
 
   def map_devices!
     @uuids = @uuids.map{|uuid, count| [Device.find(uuid), count.to_i] }
-    p @uuids.inspect
   end
 
   def generate_reservations
