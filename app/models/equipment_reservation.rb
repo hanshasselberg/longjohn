@@ -9,7 +9,15 @@ class EquipmentReservation
   attr_reader :uuids
 
   def self.in(from, to)
-    (where(:from.gte => from, :from.lt => to) + where(:to.gte => from, :to.lt => to)).uniq
+    if from.present? && to.present?
+      (where(:from.gte => from, :from.lt => to) + where(:to.gte => from, :to.lt => to)).uniq
+    elsif from.present?
+      (where(:from.gte => from) + where(:to.gte => from)).uniq
+    elsif to.present?
+      (where(:from.lt => to) + where(:to.lt => to)).uniq
+    else
+      all
+    end
   end
 
   def element_uuids= uuids

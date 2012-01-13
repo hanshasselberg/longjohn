@@ -32,29 +32,29 @@
         %th{width: '35%'} Model
         %th{width: '25%'} Count
     %tbody
-      - models.each do |kind, companies|
+      - Device.entries_of(:kind).each do |kind|
         %tr.kind{ id: classify(kind), height: '47px' }
           %td
             %a{href: '#'}= kind
           %td
           %td
           %td
-        - companies.each do |company, models|
+        - Device.entries_of(:company, kind: kind).each do |company|
           %tr.company{ id: classify(company), class: classify(kind), height: '47px', style: 'display:none' }
             %td= kind
             %td
               %a{href: '#'}= company
             %td
             %td
-          - models.each do |model|
-            %tr.model{ id: model[:uuid], class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
+          - models.select{ |model| model.kind == kind && model.company == company }.each do |model|
+            %tr.model{ id: model.object_id, class: "#{classify(kind)} #{classify(company)}", height: '47px', style: 'display:none' }
               %td= kind
               %td= company
-              %td= model[:model]
+              %td= model.model
               %td
-                %select.mini{ name: "equipment_reservation[element_uuids][#{model[:uuid]}]"}
-                  - (0..model[:total]).each do |i|
-                    %option{disabled: i > model[:available]}= i
+                %select.mini{ name: "equipment_reservation[element_uuids][#{model.object_id}]"}
+                  - (0..model.total_devices).each do |i|
+                    %option{disabled: i > model.available_devices}= i
 
   %h4 Added Devices
   %table#added_models
