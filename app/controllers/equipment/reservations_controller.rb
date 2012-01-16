@@ -2,13 +2,7 @@ class Equipment::ReservationsController < ApplicationController
   before_filter :requires_login
 
   expose(:equipment_reservation)
-  # expose(:models) { GenerateModels.for_reservation equipment_reservation.from, equipment_reservation.to }
   expose(:models) { Model.in equipment_reservation.from, equipment_reservation.to}
-
-  def new
-    Rails.logger.warn "Models:"
-    Rails.logger.warn models.inspect
-  end
 
   def create
     if equipment_reservation.save

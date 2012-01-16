@@ -52,7 +52,8 @@
               %td= company
               %td= model.model
               %td
-                %select.mini{ name: "equipment_reservation[element_uuids][#{model.object_id}]"}
+                %input{type: 'hidden'}
+                %select.mini{ name: "equipment_reservation[element_uuids][][count]"}
                   - (0..model.total_devices).each do |i|
                     %option{disabled: i > model.available_devices}= i
 

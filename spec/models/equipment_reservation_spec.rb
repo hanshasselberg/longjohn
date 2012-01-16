@@ -3,19 +3,35 @@ require 'spec_helper'
 describe EquipmentReservation do
   describe ".in" do
     context "when providing no date" do
+      let!(:reservation_one) { EquipmentReservation.create }
+      let!(:reservation_two) { EquipmentReservation.create }
       let(:reservations) { EquipmentReservation.in(nil, nil) }
 
-      it "works" do
-        reservations.should be
+      it "returns everything" do
+        reservations.should == EquipmentReservation.all
       end
     end
 
     context "when providing from" do
-      pending
+      let(:from) { Time.now-5.days }
+      let!(:reservation_one) { EquipmentReservation.create from: from }
+      let!(:reservation_two) { EquipmentReservation.create from: from-2.days }
+      let(:reservations) { EquipmentReservation.in(from, nil) }
+
+      it "returns reservation one" do
+        reservations.should == [reservation_one]
+      end
     end
 
     context "when providing to" do
-      pending
+      let(:to) { Time.now-5.days }
+      let!(:reservation_one) { EquipmentReservation.create to: to-1 }
+      let!(:reservation_two) { EquipmentReservation.create to: to+2.days }
+      let(:reservations) { EquipmentReservation.in(nil, to) }
+
+      it "returns reservation one" do
+        reservations.should == [reservation_one]
+      end
     end
 
     context "when providing from and to" do
