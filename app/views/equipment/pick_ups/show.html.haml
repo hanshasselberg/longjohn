@@ -40,7 +40,8 @@
       %th{width: '25%'} Count
   %tbody
     - equipment_reservation.reservations.each do |r|
-      %tr{data: {barcodes: models[classify("#{r['kind']}_#{r['company']}_#{r['model']}")], picked: [], total: r['count']}}
+      - model = models.find{ |model| model.kind == r['kind'] && model.company == r['company'] && model.model == r['model'] }
+      %tr{data: {barcodes: model.devices.map(&:barcode), picked: [], total: r['count']}}
         %td= r['kind']
         %td= r['company']
         %td= r['model']

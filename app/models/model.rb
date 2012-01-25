@@ -25,10 +25,6 @@ class Model
     end.values.flatten
   end
 
-  def available_devices
-    @available_devices < 0 ? 0 : @available_devices
-  end
-
   def self.in from, to
     Model.all.tap do |models|
       EquipmentReservation.in(from, to).each do |reservation|
@@ -41,6 +37,14 @@ class Model
         end
       end
     end
+  end
+
+  def devices
+    Device.where(kind: @kind, company: @company, model: @model)
+  end
+
+  def available_devices
+    @available_devices < 0 ? 0 : @available_devices
   end
 
   def ==(other)
