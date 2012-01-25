@@ -74,4 +74,21 @@ describe EquipmentReservation do
       end
     end
   end
+
+  describe "#reservation_entries" do
+    let(:reservation_entry_one) { { count: 1, model: 'A', company: 'B', kind: 'C' } }
+    let(:reservation_entry_two) { { count: nil, model: 'A', company: 'B', kind: 'C' } }
+    let(:reservation_entries) { [reservation_entry_one, reservation_entry_two] }
+    let(:reservation) { EquipmentReservation.new }
+
+    context "when providing an array of reservations" do
+      before do
+        reservation.reservation_entries = reservation_entries
+      end
+
+      it "creates one reservation" do
+        reservation.reservations.should have(1).items
+      end
+    end
+  end
 end

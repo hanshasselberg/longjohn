@@ -4,6 +4,10 @@ class Equipment::ReservationsController < ApplicationController
   expose(:equipment_reservation)
   expose(:models) { Model.in equipment_reservation.from, equipment_reservation.to}
 
+  def show
+    Rails.logger.warn equipment_reservation.inspect
+  end
+
   def create
     if equipment_reservation.save
       redirect_to equipment_reservations_path, notice: [

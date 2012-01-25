@@ -92,7 +92,7 @@ describe Model do
           EquipmentReservation.create(
             from: Time.now-1.day,
             to: Time.now,
-            reservations: [{model: device.model, company: device.company, kind: device.kind, count: 1}]
+            reservations: [{model: device.model, company: device.company, kind: device.kind, count: '1'}]
           )
         end
         let(:models) { Model.in(Time.now-2.days, Time.now) }

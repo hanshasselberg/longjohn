@@ -49,7 +49,7 @@ class Model
   end
 
   def apply_reservation(reservation, user)
-    @available_devices -= reservation['count']
+    @available_devices -= reservation['count'].to_i
     users << user
   end
 

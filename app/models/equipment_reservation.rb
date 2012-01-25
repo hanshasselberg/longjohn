@@ -20,31 +20,22 @@ class EquipmentReservation
     end
   end
 
-  def element_uuids= uuids
-    @uuids = uuids
+  def reservation_entries= reservation_entries
     self[:reservations] ||= []
-    self[:reservations] << sanititzed_uuids
+    self[:reservations] << generate_reservations(remove_zeros(reservation_entries))
     self[:reservations].flatten!
   end
 
   private
 
-  def sanititzed_uuids
-    remove_zeros!
-    map_devices!
-    generate_reservations
+  def remove_zeros(reservation_entries)
+    reservation_entries.reject{ |entry| [nil, '0'].include?(entry[:count])}
   end
 
-  def remove_zeros!
-    @uuids.reject!{ |uuid, count| count == '0' }
-  end
-
-  def map_devices!
-    @uuids = @uuids.map{|uuid, count| [Device.find(uuid), count.to_i] }
-  end
-
-  def generate_reservations
-    @uuids.map{ |device, count| {kind: device.kind, company: device.company, model: device.model, count: count} }
+  def generate_reservations(reservation_entries)
+    reservation_entries.map do |entry|
+      { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count] }
+    end
   end
 
 end
