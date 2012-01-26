@@ -1,5 +1,3 @@
-require 'generate_models'
-
 class Equipment::PickUpsController < ApplicationController
   before_filter :requires_login
 
