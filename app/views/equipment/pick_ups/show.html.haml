@@ -42,15 +42,16 @@
     - equipment_reservation.reservations.each do |r|
       - model = models.find{ |model| model.kind == r['kind'] && model.company == r['company'] && model.model == r['model'] }
       %tr{data: {barcodes: model.devices.map(&:barcode), picked: [], total: r['count']}}
-        %td= r['kind']
-        %td= r['company']
-        %td= r['model']
+        %td= model.kind
+        %td= model.company
+        %td= model.model
         %td
           %span.count
             0
           \/
           = r['count']
-%form
-  %input#device_barcodes{type: 'hidden'}
+%form.pick_up{:action => "/equipment/pick_ups", :method => "post"}
+  %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
+  %input#device_barcodes{type: 'hidden', name: 'pickups'}
   %input.btn.primary{type: 'submit'}
   %a.btn.reset{href: equipment_pick_ups_path} Cancel

@@ -2,7 +2,7 @@ $ ->
   $('form.scan').submit (e) ->
     $('.alert-message').hide()
     e.preventDefault()
-    barcode = $('input[type=text]').val()
+    barcode = $('.scan input[type=text]').val()
     for tr in $('tr')
       barcodes = jQuery.parseJSON($(tr).attr("data-barcodes"))
       if barcodes
@@ -17,7 +17,13 @@ $ ->
               $('.alert-message.error.full').show()
           else
             $('.alert-message.warn').show()
-          $('input[type=text]').val('').focus()
+          $('.scan input[type=text]').val('').focus()
           return
     $('.alert-message.error.not-found').show()
+
+  $('form.pick_up').submit (e) ->
+    barcodes = []
+    for tr in $('tr')
+      barcodes.push(jQuery.parseJSON($(tr).attr('data-picked')))
+    $('#device_barcodes').val(barcodes)
 
