@@ -5,6 +5,7 @@ class EquipmentReservation
   field :to, type: DateTime
   field :user, type: String
   field :reservations, type: Array, default: []
+  field :pickups, type: Array, default: []
 
   attr_reader :uuids
 
@@ -37,5 +38,4 @@ class EquipmentReservation
       { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count] }
     end
   end
-
 end
