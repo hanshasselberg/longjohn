@@ -5,7 +5,6 @@ class EquipmentReservation
   field :to, type: DateTime
   field :user, type: String
   field :reservations, type: Array, default: []
-  field :pickups, type: Array, default: []
 
   attr_reader :uuids
 
@@ -27,6 +26,17 @@ class EquipmentReservation
     self[:reservations].flatten!
   end
 
+  def pickups= pickups
+    return if pickups.blank?
+    pickups.map{ |barcode| Device.where(barcode: barcode).first }.compact.each do |d|
+      reservations.each do |r|
+        if r['kind'] == d.kind && r['company'] == d.company && r['model'] == d.model
+          r['pickups'] << d.barcode
+        end
+      end
+    end
+  end
+
   private
 
   def remove_zeros(reservation_entries)
@@ -35,7 +45,7 @@ class EquipmentReservation
 
   def generate_reservations(reservation_entries)
     reservation_entries.map do |entry|
-      { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count] }
+      { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count], pickups: [] }
     end
   end
 end

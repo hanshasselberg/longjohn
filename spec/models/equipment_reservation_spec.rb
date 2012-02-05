@@ -91,4 +91,51 @@ describe EquipmentReservation do
       end
     end
   end
+
+  describe "#pickups" do
+    let!(:device) { Device.create(kind: 'A', company: 'B', model: 'C', barcode: '$barcode$') }
+    let(:reservation_entry) { { count: 1, 'model' => device.model, 'company' => device.company, 'kind' => device.kind } }
+    let(:reservation) { EquipmentReservation.new(reservations: [reservation_entry]) }
+    let!(:old_reservations) { reservation.reservations }
+
+    context "when providing nil" do
+      before do
+        reservation.pickups = nil
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an empty array" do
+      before do
+        reservation.pickups = []
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an array with an invalid barcode" do
+      before do
+        reservation.pickups = ['INVALID BARCODE']
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an array with a valid barcode" do
+      before do
+        reservation.pickups = [device.barcode]
+      end
+
+      it "add the barcode to the correct reservation" do
+        reservation.reservations.should include(reservation_entry.merge('pickups' => [device.barcode]))
+      end
+    end
+  end
 end
