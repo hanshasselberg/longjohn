@@ -24,13 +24,13 @@
     %small
       %a{href: '#'} hide
 
-  %table#available_models
+  %table.table.table-bordered#available_models
     %thead
       %tr
         %th{width: '15%'} Kind
         %th{width: '25%'} Company
         %th{width: '35%'} Model
-        %th{width: '25%'} Count
+        %th{width: '15%'} Count
     %tbody
       - Device.entries_of(:kind).each do |kind|
         %tr.kind{ id: classify(kind), height: '47px' }
@@ -55,19 +55,19 @@
                 %input{type: 'hidden', name: "equipment_reservation[reservation_entries][][model]", value: model.model}
                 %input{type: 'hidden', name: "equipment_reservation[reservation_entries][][company]", value: model.company}
                 %input{type: 'hidden', name: "equipment_reservation[reservation_entries][][kind]", value: model.kind}
-                %select.mini{ name: "equipment_reservation[reservation_entries][][count]"}
+                %select.span2{ name: "equipment_reservation[reservation_entries][][count]"}
                   - (0..model.total_devices).each do |i|
                     %option{disabled: i > model.available_devices}= i
 
   %h4 Added Devices
-  %table#added_models
+  %table.table.table-bordered#added_models
     %thead
       %tr
         %th{width: '15%'} Kind
         %th{width: '25%'} Company
         %th{width: '35%'} Model
-        %th{width: '25%'} Count
+        %th{width: '15%'} Count
     %tbody
 
-  %input.btn.primary{ type: 'submit' }
-  %a.btn.reset{href: equipment_reservations_path} Cancel
+  %input.btn-primary{ type: 'submit' }
+  %a{href: equipment_reservations_path} Cancel

@@ -1,6 +1,6 @@
 $ ->
   $('form.scan').submit (e) ->
-    $('.alert-message').hide()
+    $('.alert').hide()
     e.preventDefault()
     barcode = $('.scan input[type=text]').val()
     for tr in $('tr')
@@ -14,12 +14,12 @@ $ ->
               $(tr).attr('data-picked', JSON.stringify(picked).replace('"', '\"'))
               $('.count', tr).text(picked.length)
             else
-              $('.alert-message.error.full').show()
+              $('.alert.alert-error.full').show()
           else
-            $('.alert-message.warn').show()
+            $('.alert.alert-info').show()
           $('.scan input[type=text]').val('').focus()
           return
-    $('.alert-message.error.not-found').show()
+    $('.alert.alert-error.not-found').show()
 
   $('form.pick_up').submit (e) ->
     barcodes = []

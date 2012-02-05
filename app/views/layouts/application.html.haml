@@ -10,12 +10,12 @@
     - if params[:controller] != 'start'
       .container
         - if flash[:notice].present?
-          .alert-message.success
+          .alert.alert-success
             %p
               %strong= flash[:notice][0]
               = flash[:notice][1]
         - if flash[:alert].present?
-          .alert-message.error
+          .alert.alert-error
             %p
               %strong= flash[:alert][0]
               = flash[:alert][1]
