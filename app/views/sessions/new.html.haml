@@ -1,13 +1,15 @@
-%form{:action => "/sessions", :method => "post"}
+%form.form-horizontal{:action => "/sessions", :method => "post"}
   %fieldset
     %legend Log in
-    .clearfix
+    .control-group
       %label{for: 'mail'} Email
-      .input
-        %input.large#email{type: 'text', name: 'user[email]'}
-    .clearfix
+      .controls
+        .input
+          %input#email{type: 'text', name: 'user[email]'}
+    .control-group
       %label{for: 'password'} Password
-      .input
-        %input.large#password{type: 'password', name: 'user[password]'}
-    .actions
-      %input.btn.primary{type: 'submit'}
+      .controls
+        .input
+          %input#password{type: 'password', name: 'user[password]'}
+    .form-actions
+      %input.btn-primary{type: 'submit'}

@@ -10,6 +10,7 @@ Longjohn::Application.routes.draw do
   namespace :equipment do
     resources :reservations
     resources :pick_ups
+    resources :returns
   end
 
   root :to => 'start#index'

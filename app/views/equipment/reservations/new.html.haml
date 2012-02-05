@@ -4,14 +4,7 @@
     %small Please add the equipment you need.
 
 %br
-%form
-  .inline-inputs
-    Name
-    %input{type: 'text', value: params[:equipment_reservation][:name], disabled: true}
-    from
-    %input.medium{:type => "text", value: params[:equipment_reservation][:from], disabled: true}
-    to
-    %input.medium{:type => "text", value: params[:equipment_reservation][:to], disabled: true}
+= render "shared/equipment/reservation_line"
 
 %form#new_reservation{:action => "/equipment/reservations", :method => "post"}
   %input{type: 'hidden', name: 'equipment_reservation[name]', value: params[:equipment_reservation][:name]}

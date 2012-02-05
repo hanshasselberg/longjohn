@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   # FIXME: strange problems on creating new reservations... :(
   # protect_from_forgery
-  helper_method :current_user
+
+  expose(:equipment_reservations) do
+    current_user.equipment_reservations.sort_by{ |r| r.from }
+  end
+
+  expose(:current_user) { current_user }
 
   private
 

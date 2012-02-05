@@ -3,28 +3,13 @@
     Equipment Reservation
     %small You can create new and view existing equipment reservations here.
 %br
-%form{action: new_equipment_reservation_path, method: :get}
-  .inline-inputs
-    Name
-    %input{type: 'text', name: 'equipment_reservation[name]'}
-    from
-    %input.medium{:type => "text", name: 'equipment_reservation[from]', value: '1.1.2011 11:11'}
-    to
-    %input.medium{:type => "text", name: 'equipment_reservation[to]', value: '3.1.2011 11:11'}
-    %input.btn.primary{type: 'submit', value: 'Proceed'}
+%form.form-inline{action: new_equipment_reservation_path, method: :get}
+  %input{type: 'text', name: 'equipment_reservation[name]', placeholder: 'Name'}
+  %input{type: 'text', name: 'equipment_reservation[from]', value: '1.1.2011 11:11', placeholder: '1.1.2011 11:11'}
+  %input{type: 'text', name: 'equipment_reservation[to]', value: '3.1.2011 11:11', placeholder: '3.1.2011 11:11'}
+  %input.btn-primary{type: 'submit', value: 'Proceed'}
 
 %h4
   Future Reservations
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th{width: '60%'} Name
-      %th{width: '20%'} From
-      %th{width: '20%'} To
-  %tbody
-    - current_user.equipment_reservations.sort_by{ |r| r.from }.each do |r|
-      %tr
-        %td= link_to r.name, r
-        %td= l r.from.in_time_zone("Berlin"), :format => :short
-        %td= l r.to.in_time_zone("Berlin"), :format => :short
+= render "shared/equipment/reservations_table"

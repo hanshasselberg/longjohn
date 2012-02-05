@@ -6,15 +6,4 @@
 %h4
   Future Reservations
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th{width: '60%'} Name
-      %th{width: '20%'} From
-      %th{width: '20%'} To
-  %tbody
-    - current_user.equipment_reservations.sort_by{ |r| r.from }.each do |r|
-      %tr
-        %td= link_to r.name, equipment_pick_up_path(r)
-        %td= l r.from.in_time_zone("Berlin"), :format => :short
-        %td= l r.to.in_time_zone("Berlin"), :format => :short
+= render "shared/equipment/reservations_table"
