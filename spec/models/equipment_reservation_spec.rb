@@ -133,7 +133,17 @@ describe EquipmentReservation do
         reservation.pickups = [device.barcode]
       end
 
-      it "add the barcode to the correct reservation" do
+      it "adds the barcode to the correct reservation" do
+        reservation.reservations.should include(reservation_entry.merge('pickups' => [device.barcode]))
+      end
+    end
+
+    context "when providing duplicate barcodes" do
+      before do
+        reservation.pickups = [device.barcode, device.barcode]
+      end
+
+      it "adds only one barcode" do
         reservation.reservations.should include(reservation_entry.merge('pickups' => [device.barcode]))
       end
     end

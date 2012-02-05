@@ -31,7 +31,9 @@ class EquipmentReservation
     pickups.map{ |barcode| Device.where(barcode: barcode).first }.compact.each do |d|
       reservations.each do |r|
         if r['kind'] == d.kind && r['company'] == d.company && r['model'] == d.model
+          r['pickups'] ||= []
           r['pickups'] << d.barcode
+          r['pickups'].uniq!
         end
       end
     end
