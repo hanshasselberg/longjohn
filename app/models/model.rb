@@ -53,7 +53,12 @@ class Model
   end
 
   def apply_reservation(reservation, user)
-    @available_devices -= reservation['count'].to_i
+    if reservation['returns'].present?
+      @available_devices -= reservation['pickups'] - reservation['returns']
+    else
+      @available_devices -= reservation['count'].to_i
+    end
+
     users << user
   end
 

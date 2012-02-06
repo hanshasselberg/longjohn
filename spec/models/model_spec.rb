@@ -87,18 +87,24 @@ describe Model do
       end
 
       context "when there is a reservation" do
-        let!(:device)  { Device.create(model: 'A', company: '1', kind: 'H') }
-        let!(:reservation) do
-          EquipmentReservation.create(
-            from: Time.now-1.day,
-            to: Time.now,
-            reservations: [{model: device.model, company: device.company, kind: device.kind, count: '1'}]
-          )
+        context "when there are returns" do
+          pending "TODO: test!"
         end
-        let(:models) { Model.in(Time.now-2.days, Time.now) }
 
-        it "returns a model with available_devices smaller then total_devices" do
-          models.any?{ |model| model.available_devices < model.total_devices }.should be
+        context "when there are no returns" do
+          let!(:device)  { Device.create(model: 'A', company: '1', kind: 'H') }
+          let!(:reservation) do
+            EquipmentReservation.create(
+              from: Time.now-1.day,
+              to: Time.now,
+              reservations: [{model: device.model, company: device.company, kind: device.kind, count: '1', returns: []}]
+            )
+          end
+          let(:models) { Model.in(Time.now-2.days, Time.now) }
+
+          it "returns a model with available_devices smaller then total_devices" do
+            models.any?{ |model| model.available_devices < model.total_devices }.should be
+          end
         end
       end
     end
