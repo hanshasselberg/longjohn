@@ -148,4 +148,61 @@ describe EquipmentReservation do
       end
     end
   end
+
+  describe "#returns" do
+    let!(:device) { Device.create(kind: 'A', company: 'B', model: 'C', barcode: '$barcode$') }
+    let(:reservation_entry) { { count: 1, 'model' => device.model, 'company' => device.company, 'kind' => device.kind } }
+    let(:reservation) { EquipmentReservation.new(reservations: [reservation_entry]) }
+    let!(:old_reservations) { reservation.reservations }
+
+    context "when providing nil" do
+      before do
+        reservation.returns = nil
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an empty array" do
+      before do
+        reservation.returns = []
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an array with an invalid barcode" do
+      before do
+        reservation.returns = ['INVALID BARCODE']
+      end
+
+      it "doesn't change" do
+        reservation.reservations.should eq(old_reservations)
+      end
+    end
+
+    context "when providing an array with a valid barcode" do
+      before do
+        reservation.returns = [device.barcode]
+      end
+
+      it "adds the barcode to the correct reservation" do
+        reservation.reservations.should include(reservation_entry.merge('returns' => [device.barcode]))
+      end
+    end
+
+    context "when providing duplicate barcodes" do
+      before do
+        reservation.returns = [device.barcode, device.barcode]
+      end
+
+      it "adds only one barcode" do
+        reservation.reservations.should include(reservation_entry.merge('returns' => [device.barcode]))
+      end
+    end
+  end
 end

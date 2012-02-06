@@ -39,9 +39,11 @@
             = r['pickups'].size
           \/
           = r['count']
+          %small
+            = model.devices.map(&:barcode).join(', ')
 %form.pick_up{:action => "/equipment/pick_ups", :method => "post"}
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'pickups'}
   %input.btn-primary{type: 'submit'}
-  %a{href: equipment_returns_path} Return Stuff
+  %a{href: equipment_return_path(equipment_reservation)} Return Stuff
   %a{href: equipment_pick_ups_path} Back

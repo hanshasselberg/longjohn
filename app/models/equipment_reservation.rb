@@ -39,6 +39,19 @@ class EquipmentReservation
     end
   end
 
+  def returns= returns
+    return if returns.blank?
+    returns.map{ |barcode| Device.where(barcode: barcode).first }.compact.each do |d|
+      reservations.each do |r|
+        if r['kind'] == d.kind && r['company'] == d.company && r['model'] == d.model
+          r['returns'] ||= []
+          r['returns'] << d.barcode
+          r['returns'].uniq!
+        end
+      end
+    end
+  end
+
   private
 
   def remove_zeros(reservation_entries)
@@ -47,7 +60,7 @@ class EquipmentReservation
 
   def generate_reservations(reservation_entries)
     reservation_entries.map do |entry|
-      { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count], pickups: [] }
+      { kind: entry[:kind], company: entry[:company], model: entry[:model], count: entry[:count], pickups: [], returns: [] }
     end
   end
 end
