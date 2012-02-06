@@ -12,7 +12,7 @@
   %input{type: 'hidden', name: 'equipment_reservation[to]', value: params[:equipment_reservation][:to]}
   %input{type: 'hidden', name: 'equipment_reservation[user]', value: current_user._id.to_s}
 
-  %h4
+  %h3
     Available Devices
     %small
       %a{href: '#'} hide
@@ -52,7 +52,7 @@
                   - (0..model.total_devices).each do |i|
                     %option{disabled: i > model.available_devices}= i
 
-  %h4 Added Devices
+  %h3 Added Devices
   %table.table.table-bordered#added_models
     %thead
       %tr
