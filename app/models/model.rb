@@ -54,7 +54,7 @@ class Model
 
   def apply_reservation(reservation, user)
     if reservation['returns'].present?
-      @available_devices -= reservation['pickups'] - reservation['returns']
+      @available_devices -= (reservation['pickups'] - reservation['returns']).size
     else
       @available_devices -= reservation['count'].to_i
     end

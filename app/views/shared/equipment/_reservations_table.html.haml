@@ -7,6 +7,8 @@
   %tbody
     - equipment_reservations.each do |r|
       %tr
-        %td= link_to r.name, "/#{params['controller']}/#{r._id}"
+        %td
+          = link_to r.name, "/#{params['controller']}/#{r._id}"
+          = r.labels
         %td= l r.from.in_time_zone("Berlin"), :format => :short
         %td= l r.to.in_time_zone("Berlin"), :format => :short

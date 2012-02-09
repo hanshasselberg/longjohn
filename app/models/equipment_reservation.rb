@@ -52,7 +52,37 @@ class EquipmentReservation
     end
   end
 
+  def pickup_warning
+    return false if pickups_count <= 0
+    reservations_count > pickups_count
+  end
+
+  def return_warning
+    return false if returns_count <= 0
+    pickups_count > returns_count
+  end
+
   private
+
+  def reservations_count
+    @reservations_count ||= reservations.map{|r| r['count'].to_i}.compact.inject(:+) || 0
+  end
+
+  def pickups_count
+    @pickups_count ||= all_picked_up_barcodes.count
+  end
+
+  def returns_count
+    @returns_count ||= all_returned_barcodes.count
+  end
+
+  def all_picked_up_barcodes
+    reservations.map{|r| r['pickups']}.flatten
+  end
+
+  def all_returned_barcodes
+    reservations.map{|r| r['returns']}.flatten
+  end
 
   def remove_zeros(reservation_entries)
     reservation_entries.reject{ |entry| [nil, '0'].include?(entry[:count])}

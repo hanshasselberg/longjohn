@@ -205,4 +205,100 @@ describe EquipmentReservation do
       end
     end
   end
+
+  describe "#pickup_warning" do
+    let!(:device_one) { Device.create(kind: 'A', company: 'B', model: 'C', barcode: '$barcode1$') }
+    let!(:device_two) { Device.create(kind: 'D', company: 'E', model: 'F', barcode: '$barcode2$') }
+    let(:reservation_entry_one) do
+      {
+        'count' => 1,
+        'model' => device_one.model,
+        'company' => device_one.company,
+        'kind' => device_one.kind,
+        'pickups' => []
+      }
+    end
+    let(:reservation_entry_two) do
+      {
+        'count' => 1,
+        'model' => device_two.model,
+        'company' => device_two.company,
+        'kind' => device_two.kind,
+        'pickups' => []
+      }
+    end
+    let(:reservation) do
+      EquipmentReservation.new(reservations: [reservation_entry_one, reservation_entry_two])
+    end
+
+    context "when none of the reservations are picked up" do
+      it "returns false" do
+        reservation.pickup_warning.should be_false
+      end
+    end
+
+    context "when not all reservations are picked up" do
+      before do
+        reservation.reservations[0]['pickups'] = [device_one.barcode]
+      end
+      it "returns true" do
+        reservation.pickup_warning.should be
+      end
+    end
+
+    context "when all reservations are picked up" do
+      it "returns false" do
+        reservation.pickup_warning.should be_false
+      end
+    end
+  end
+
+  describe "#return_warning" do
+    let!(:device_one) { Device.create(kind: 'A', company: 'B', model: 'C', barcode: '$barcode1$') }
+    let!(:device_two) { Device.create(kind: 'D', company: 'E', model: 'F', barcode: '$barcode2$') }
+    let(:reservation_entry_one) do
+      {
+        'count' => 1,
+        'model' => device_one.model,
+        'company' => device_one.company,
+        'kind' => device_one.kind,
+        'pickups' => [device_one.barcode],
+        'returns' => []
+      }
+    end
+    let(:reservation_entry_two) do
+      {
+        'count' => 1,
+        'model' => device_two.model,
+        'company' => device_two.company,
+        'kind' => device_two.kind,
+        'pickups' => [device_two.barcode],
+        'returns' => []
+      }
+    end
+    let(:reservation) do
+      EquipmentReservation.new(reservations: [reservation_entry_one, reservation_entry_two])
+    end
+
+    context "when none of the reservations are returned" do
+      it "returns false" do
+        reservation.return_warning.should be_false
+      end
+    end
+
+    context "when not all reservations are returned" do
+      before do
+        reservation.reservations[0]['returns'] = [device_one.barcode]
+      end
+      it "returns true" do
+        reservation.return_warning.should be
+      end
+    end
+
+    context "when all reservations are returned" do
+      it "returns false" do
+        reservation.return_warning.should be_false
+      end
+    end
+  end
 end

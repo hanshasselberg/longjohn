@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery
 
   expose(:equipment_reservations) do
-    current_user.equipment_reservations.sort_by{ |r| r.from }
+    current_user.equipment_reservations.sort_by{ |r| r.from }.map{|r| EquipmentReservationDecorator.new(r)}
   end
 
   expose(:current_user) { current_user }
