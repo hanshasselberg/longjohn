@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :email, :type => String
   field :password_hash, :type => String
   field :password_salt, :type => String
@@ -37,4 +38,8 @@ class User
     EquipmentReservation.where(user: _id)
   end
 
+  # TODO: implement
+  def admin?
+    true
+  end
 end
