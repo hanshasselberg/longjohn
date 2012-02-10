@@ -13,6 +13,12 @@ Longjohn::Application.routes.draw do
     resources :returns
   end
 
+  namespace :admin do
+    resources :equipment_reservations
+    resources :users
+    resources :devices
+  end
+
   root :to => 'start#index'
 
 end

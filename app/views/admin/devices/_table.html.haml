@@ -1,0 +1,16 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Kind
+      %th Company
+      %th Model
+      %th Barcode
+      %th Action
+  %tbody
+    - devices.each do |device|
+      %tr
+        %td= device.kind
+        %td= device.company
+        %td= device.model
+        %td= device.barcode
+        %td= link_to "Edit", edit_admin_device_path(device)

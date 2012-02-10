@@ -1,0 +1,16 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th From
+      %th To
+      %th User
+      %th Action
+  %tbody
+    - equipment_reservations.each do |equipment_reservation|
+      %tr
+        %td= equipment_reservation.name
+        %td= l equipment_reservation.from.in_time_zone("Berlin"), :format => :short
+        %td= l equipment_reservation.to.in_time_zone("Berlin"), :format => :short
+        %td= User.find(equipment_reservation.user).email
+        %td= link_to "Edit", edit_admin_equipment_reservation_path(equipment_reservation)

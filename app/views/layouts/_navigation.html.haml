@@ -9,14 +9,14 @@
       %a.brand{:href => "#"}Longjohn
       .container.nav-collapse
         %ul.nav
-          %li{class: "#{'active' if controller == 'start'}"}
+          %li{class: "#{'active' if controller == '^start'}"}
             = link_to "Home", root_path
-          %li.dropdown{class: "#{'active' if controller =~ /studio/}"}
+          %li.dropdown{class: "#{'active' if controller =~ /^studio/}"}
             %a.dropdown-toggle{href: '#'} Studio
             %ul.dropdown-menu
               %li
                 %a{href: '#'} Reservation
-          %li.dropdown{class: "#{'active' if controller =~ /equipment/}"}
+          %li.dropdown{class: "#{'active' if controller =~ /^equipment/}"}
             %a.dropdown-toggle{href: '#'} Equipment
             %ul.dropdown-menu
               %li
@@ -27,6 +27,16 @@
                 = link_to "Return", equipment_returns_path
           %li
             %a{href: '#'} Projects
+          - if current_user.try(:admin?)
+            %li.dropdown{class: "#{'active' if controller =~ /^admin/}"}
+              %a.dropdown-toggle{href: '#'} Admin
+              %ul.dropdown-menu
+                %li
+                  = link_to "Users", admin_users_path
+                %li
+                  = link_to "Devices", admin_devices_path
+                %li
+                  = link_to "Equipment Reservation", admin_equipment_reservation_path
         %ul.nav.pull-right
           - if current_user
             %li
