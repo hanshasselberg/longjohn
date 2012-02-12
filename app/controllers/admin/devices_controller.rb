@@ -12,4 +12,11 @@ class Admin::DevicesController < ApplicationController
       render "edit"
     end
   end
+
+  def destroy
+    if device.destroy
+      redirect_to admin_devices_path, notice: [
+        "Destroyed!", "This Device was successfully destroyed."]
+    end
+  end
 end

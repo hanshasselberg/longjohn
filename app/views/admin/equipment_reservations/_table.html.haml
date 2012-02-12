@@ -13,4 +13,6 @@
         %td= l equipment_reservation.from.in_time_zone("Berlin"), :format => :short
         %td= l equipment_reservation.to.in_time_zone("Berlin"), :format => :short
         %td= User.find(equipment_reservation.user).email
-        %td= link_to "Edit", edit_admin_equipment_reservation_path(equipment_reservation)
+        %td
+          = link_to "Edit", edit_admin_equipment_reservation_path(equipment_reservation)
+          = link_to 'Destroy', admin_equipment_reservation_path(equipment_reservation), method: :delete

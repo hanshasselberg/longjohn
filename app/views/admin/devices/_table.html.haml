@@ -13,4 +13,6 @@
         %td= device.company
         %td= device.model
         %td= device.barcode
-        %td= link_to "Edit", edit_admin_device_path(device)
+        %td
+          = link_to "Edit", edit_admin_device_path(device)
+          = link_to 'Destroy', admin_device_path(device), method: :delete

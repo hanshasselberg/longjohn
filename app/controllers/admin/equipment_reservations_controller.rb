@@ -12,4 +12,11 @@ class Admin::EquipmentReservationsController < ApplicationController
       render "edit"
     end
   end
+
+  def destroy
+    if equipment_reservation.destroy
+      redirect_to admin_equipment_reservations_path, notice: [
+        "Destroyed!", "This Reservation was successfully destroyed."]
+    end
+  end
 end
