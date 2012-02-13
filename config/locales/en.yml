@@ -29,7 +29,7 @@ en:
           equipment_reservation: "Equipment reservation"
         log_out: "Log out"
         log_in: "Log in"
-        sign_in: "Sign in"
+        sign_up: "Sign in"
     session:
       new:
         log_in: "Log in"
