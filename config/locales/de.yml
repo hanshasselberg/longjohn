@@ -1,4 +1,159 @@
 de:
   views:
+    shared:
+      equipment:
+        _reservations_table:
+          name: "Name"
+          from: "von"
+          to: "bis"
+      _barcode_scan_form:
+        scan: "Scan"
+    layouts:
+      _navigation:
+        longjohn: "Longjohn"
+        home: "Home"
+        studio:
+          title: "Studios"
+          reservation: "Reservierung"
+        equipment:
+          title: "Geräte"
+          reservation: "Reservierung"
+          pick_up: "Ausleihe"
+          return: "Rückgabe"
+        project:
+          title: "Projekte"
+        admin:
+          title: "Admin"
+          user: "Benutzer"
+          device: "Geräte"
+          equipment_reservation: "Gerätereservierungen"
+        log_out: "Ausloggen"
+        log_in: "Einloggen"
+        sign_in: "Anmelden"
+    session:
+      new:
+        log_in: "Einloggen"
+        email: "Email"
+        password: "Passwort"
+        submit: "Speichern"
+    user:
+      new:
+        sign_up: "Anmelden"
+        email: "Email"
+        password: "Passwort"
+        submit: "Speichern"
     equipment:
-      reservation: fu
+      reservation:
+        index:
+          heading: "Gerätereservierungen"
+          subheading: "Du kannst hier neue Gerätereservierungen anlegen und alte ansehen."
+          future_reservations: "Zukünftige Gerätereservierungen"
+        show:
+          heading: "Gerätereservierungen"
+          subheading: "Das ist sie."
+          reserved_devices: "reservierte Geräte"
+          kind: "Art"
+          company: "Firma"
+          model: "Modell"
+          count: "Anzahl"
+          destroy: "Löschen"
+          pick_up: "Ausleihen"
+          back: "zurück"
+      pick_up:
+        index:
+          heading: "Geräteausleihe"
+          subheading: "Hier kannst du deine reservierten Geräte ausleihen."
+          future_reservations: "Zukünftige Gerätereservierungen"
+        show:
+          heading: "Geräteausleihe"
+          subheading: "Scanne jetzt die Geräte."
+          error:
+            not_found:
+              title: "Nichts gefunden!"
+              desc: "Diesen Barcode gibt es nicht im System."
+            full:
+              title: "Genug!"
+              desc: "Du hast schon genug Geräte eingescannt. Jetzt reichts."
+            double:
+              title: "Doppelt."
+              desc: "Diesen Barcode hast du schonmal eingescannt."
+          devices: "Geräte"
+          kind: "Art"
+          company: "Firma"
+          model: "Modell"
+          count: "Anzahl"
+          submit: "Speichern"
+          return: "Rückgabe"
+          back: "zurück"
+      return:
+        index:
+          heading: "Geräterückgabe"
+          subheading: "Hier kannst du die ausgeliehenen Geräte zurückgeben"
+          reservations: "Ausgeliehene Geräte"
+        show:
+          heading: "Geräterückgabe"
+          subheading: "Scanne jetzt die Geräte."
+          error:
+            not_found:
+              title: "Nichts gefunden!"
+              desc: "Diesen Barcode gibt es nicht im System."
+            double:
+              title: "Doppelt."
+              desc: "Diesen Barcode hast du schonmal eingescannt."
+          devices: "Geräte"
+          kind: "Art"
+          company: "Firma"
+          model: "Modell"
+          count: "Anzahl"
+          submit: "Speichern"
+          back: "zurück"
+    admin:
+      user:
+        index:
+          heading: "Benutzer"
+          subheading: "Hier kannst du Benutzer ändern"
+          list: "Liste der Benutzer"
+        _users_table:
+          email: "Email"
+          created_at: "Erstellt am"
+          action: "Aktion"
+          edit: "Ändern"
+        edit:
+          heading: "Benutzer"
+          subheading: "Änder den Benutzer."
+          email: "Email"
+          submit: "Speichern"
+      device:
+        index:
+          heading: "Geräte"
+          subheading: "Hier kannst du die Geräte ändern."
+          list: "Liste der Geräte"
+        _table:
+          kind: "Art"
+          company: "Firma"
+          model: "Modell"
+          barcode: "Barcode"
+          action: "Aktion"
+          edit: "Ändern"
+          destroy: "Löschen"
+        edit:
+          heading: "Geräte"
+          subheading: "Änder das Gerät"
+          kind: "Art"
+          company: "Firma"
+          model: "Modell"
+          barcode: "Barcode"
+          submit: "Speichern"
+      equipment_reservation:
+        index:
+          heading: "Geräteausleihe"
+          subheading: "hier kannst die Geräteausleihen ändern"
+          list: "Liste der Geräteausleihen."
+        _table:
+          name: "Name"
+          from: "von"
+          to: "bis"
+          user: "Benutzer"
+          action: "Aktion"
+          edit: "ändern"
+          destroy: "Löschen"

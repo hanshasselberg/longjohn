@@ -121,12 +121,11 @@ en:
         edit:
           heading: "User"
           subheading: "Change the user."
-          kind: "Kind"
           email: "Email"
           submit: "Submit"
       device:
         index:
-          heading: "Users"
+          heading: "Devices"
           subheading: "You can change devices here"
           list: "List of devices"
         _table:
