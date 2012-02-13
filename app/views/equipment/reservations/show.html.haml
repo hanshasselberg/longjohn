@@ -1,26 +1,27 @@
 .page-header
   %h1
-    Equipment Reservation
-    %small Yeah, this is it.
+    = t(:"views.equipment.reservation.show.heading")
+    %small
+      = t(:"views.equipment.reservation.show.subheading")
 
 %br
 %form
   .inline-inputs
-    Name
+    = t(:"views.shared.equipment._reservation_table.name")
     %input{type: 'text', value: equipment_reservation.name, disabled: true}
-    from
+    = t(:"views.shared.equipment._reservation_table.from")
     %input.medium{:type => "text", value: equipment_reservation.from.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
-    to
+    = t(:"views.shared.equipment._reservation_table.to")
     %input.medium{:type => "text", value: equipment_reservation.to.in_time_zone.strftime('%d.%m.%Y %H:%M'), disabled: true}
 
-%h3 Reserved Devices
+%h3= t(:"views.equipment.reservation.show.reserved_devices")
 %table.table.table-bordered
   %thead
     %tr
-      %th{width: '15%'} Kind
-      %th{width: '25%'} Company
-      %th{width: '35%'} Model
-      %th{width: '25%'} Count
+      %th{width: '15%'}= t(:"views.equipment.reservation.show.kind")
+      %th{width: '25%'}= t(:"views.equipment.reservation.show.company")
+      %th{width: '35%'}= t(:"views.equipment.reservation.show.model")
+      %th{width: '25%'}= t(:"views.equipment.reservation.show.count")
   %tbody
     - equipment_reservation.reservations.each do |model|
       %tr
@@ -32,7 +33,9 @@
 %form{:action => "/equipment/reservations/#{equipment_reservation._id}", :method => "post"}
   %input{:name => "_method", :type => "hidden", :value => "delete"}
   %input{:name => "user", :type => "hidden", :value => current_user._id.to_s }
-  %input.btn-danger{type: 'submit', value: 'Destroy'}
-  %a{href: equipment_pick_up_path(equipment_reservation)} Pick up
-  %a{href: equipment_reservations_path} Back
+  %input.btn-danger{type: 'submit', value: t(:"views.equipment.reservation.show.destroy")}
+  %a{href: equipment_pick_up_path(equipment_reservation)}
+    = t(:"views.equipment.reservation.show.pick_up")
+  %a{href: equipment_reservations_path}
+    = t(:"views.equipment.reservation.show.back")
 

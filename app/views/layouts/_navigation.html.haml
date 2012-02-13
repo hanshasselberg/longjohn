@@ -6,45 +6,45 @@
         %span.i-bar
         %span.i-bar
         %span.i-bar
-      %a.brand{:href => "#"}Longjohn
+      %a.brand{:href => "#"}= t(:"views.layouts._navigation.longjohn")
       .container.nav-collapse
         %ul.nav
           %li{class: "#{'active' if controller == '^start'}"}
             = link_to "Home", root_path
           %li.dropdown{class: "#{'active' if controller =~ /^studio/}"}
-            %a.dropdown-toggle{href: '#'} Studio
+            %a.dropdown-toggle{href: '#'}= t(:"views.layouts._navigation.studio.studio")
             %ul.dropdown-menu
               %li
-                %a{href: '#'} Reservation
+                %a{href: '#'}= t(:"views.layouts._navigation.studio.reservation")
           %li.dropdown{class: "#{'active' if controller =~ /^equipment/}"}
-            %a.dropdown-toggle{href: '#'} Equipment
+            %a.dropdown-toggle{href: '#'}= t(:"views.layouts._navigation.equipment.title")
             %ul.dropdown-menu
               %li
-                = link_to "Reservation", equipment_reservations_path
+                = link_to t(:"views.layouts._navigation.equipment.reservation"), equipment_reservations_path
               %li
-                = link_to "Pick up", equipment_pick_ups_path
+                = link_to t(:"views.layouts._navigation.equipment.pick_up"), equipment_pick_ups_path
               %li
-                = link_to "Return", equipment_returns_path
+                = link_to t(:"views.layouts._navigation.equipment.return"), equipment_returns_path
           %li
-            %a{href: '#'} Projects
+            %a{href: '#'}= t(:"views.layouts._navigation.project.title")
           - if current_user.try(:admin?)
             %li.dropdown{class: "#{'active' if controller =~ /^admin/}"}
-              %a.dropdown-toggle{href: '#'} Admin
+              %a.dropdown-toggle{href: '#'}= t(:"views.layouts._navigation.admin.title")
               %ul.dropdown-menu
                 %li
-                  = link_to "Users", admin_users_path
+                  = link_to t(:"views.layouts._navigation.admin.user"), admin_users_path
                 %li
-                  = link_to "Devices", admin_devices_path
+                  = link_to t(:"views.layouts._navigation.admin.device"), admin_devices_path
                 %li
-                  = link_to "Equipment Reservation", admin_equipment_reservation_path
+                  = link_to t(:"views.layouts._navigation.admin.equipment_reservation"), admin_equipment_reservations_path
         %ul.nav.pull-right
           - if current_user
             %li
               %a{href: '#'}= current_user.email
             %li
-              = link_to "Log out", log_out_path
+              = link_to t(:"views.layouts._navigation.log_out"), log_out_path
           - else
             %li
-              = link_to "Log in", log_in_path
+              = link_to t(:"views.layouts._navigation.log_in"), log_in_path
             %li
-              = link_to "Sign up", sign_up_path
+              = link_to t(:"views.layouts._navigation.sign_up"), sign_up_path

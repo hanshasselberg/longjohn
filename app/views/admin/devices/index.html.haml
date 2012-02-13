@@ -1,9 +1,8 @@
 .page-header
   %h1
-    Devices
-    %small You can change devices here.
+    = t(:"views.admin.device.index.heading")
+    %small= t(:"views.admin.device.index.subheading")
 %br
-%h3
-  List of devices
+%h3= t(:"views.admin.device.index.list")
 
 = render "table"

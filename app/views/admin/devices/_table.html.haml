@@ -1,11 +1,11 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Kind
-      %th Company
-      %th Model
-      %th Barcode
-      %th Action
+      %th= t(:"views.admin.device._table.kind")
+      %th= t(:"views.admin.device._table.company")
+      %th= t(:"views.admin.device._table.model")
+      %th= t(:"views.admin.device._table.barcode")
+      %th= t(:"views.admin.device._table.action")
   %tbody
     - devices.each do |device|
       %tr
@@ -14,5 +14,5 @@
         %td= device.model
         %td= device.barcode
         %td
-          = link_to "Edit", edit_admin_device_path(device)
-          = link_to 'Destroy', admin_device_path(device), method: :delete
+          = link_to t(:"views.admin.device._table.edit"), edit_admin_device_path(device)
+          = link_to t(:"views.admin.device._table.destroy"), admin_device_path(device), method: :delete

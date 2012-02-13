@@ -1,11 +1,11 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Name
-      %th From
-      %th To
-      %th User
-      %th Action
+      %th= t(:"views.admin.equipment_reservation._table.name")
+      %th= t(:"views.admin.equipment_reservation._table.from")
+      %th= t(:"views.admin.equipment_reservation._table.to")
+      %th= t(:"views.admin.equipment_reservation._table.user")
+      %th= t(:"views.admin.equipment_reservation._table.action")
   %tbody
     - equipment_reservations.each do |equipment_reservation|
       %tr
@@ -14,5 +14,5 @@
         %td= l equipment_reservation.to.in_time_zone("Berlin"), :format => :short
         %td= User.find(equipment_reservation.user).email
         %td
-          = link_to "Edit", edit_admin_equipment_reservation_path(equipment_reservation)
-          = link_to 'Destroy', admin_equipment_reservation_path(equipment_reservation), method: :delete
+          = link_to t(:"views.admin.equipment_reservation._table.edit"), edit_admin_equipment_reservation_path(equipment_reservation)
+          = link_to t(:"views.admin.equipment_reservation._table.destroy"), admin_equipment_reservation_path(equipment_reservation), method: :delete

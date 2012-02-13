@@ -1,9 +1,9 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th{width: '60%'} Name
-      %th{width: '20%'} From
-      %th{width: '20%'} To
+      %th{width: '60%'}= t(:"views.shared.equipment._reservations_table.name")
+      %th{width: '20%'}= t(:"views.shared.equipment._reservations_table.from")
+      %th{width: '20%'}= t(:"views.shared.equipment._reservations_table.to")
   %tbody
     - equipment_reservations.each do |r|
       %tr

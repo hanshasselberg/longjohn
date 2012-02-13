@@ -1,14 +1,15 @@
 .page-header
   %h1
-    Equipment Return
-    %small Scan the devices you want, NOW!
+    = t(:"views.equipment.return.index.heading")
+    %small= t(:"views.equipment.return.index.subheading")
 %br
+
 .alert.alert-error.not-found{style: 'display:none;'}
-  %strong Not Found!
-  Couldn't find this Barcode :(.
+  %strong= t(:"views.equipment.return.show.error.not_found.title")
+  = t(:"views.equipment.return.show.error.not_found.desc")
 .alert.alert-info{style: 'display:none;'}
-  %strong Double scan!
-  This Barcode was scanned at least twice.
+  %strong= t(:"views.equipment.return.show.error.double.title")
+  = t(:"views.equipment.return.show.error.double.desc")
 
 = render "shared/equipment/reservation_line"
 
@@ -16,14 +17,14 @@
 
 = render "shared/barcode_scan_form"
 
-%h3 Devices
+%h3= t(:"views.equipment.return.show.devices")
 %table.table.table-bordered
   %thead
     %tr
-      %th{width: '15%'} Kind
-      %th{width: '25%'} Company
-      %th{width: '35%'} Model
-      %th{width: '25%'} Count
+      %th{width: '15%'}= t(:"views.equipment.return.show.kind")
+      %th{width: '25%'}= t(:"views.equipment.return.show.company")
+      %th{width: '35%'}= t(:"views.equipment.return.show.model")
+      %th{width: '25%'}= t(:"views.equipment.return.show.count")
   %tbody
     - equipment_reservation.reservations.each do |r|
       - model = models.find{ |model| model.kind == r['kind'] && model.company == r['company'] && model.model == r['model'] }
@@ -41,5 +42,5 @@
 %form.return{:action => "/equipment/returns", :method => "post"}
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'returns'}
-  %input.btn-primary{type: 'submit'}
-  %a{href: equipment_returns_path} Back
+  %input.btn-primary{type: 'submit', value: t(:"views.equipment.return.show.submit")}
+  %a{href: equipment_returns_path}= t(:"views.equipment.return.show.back")

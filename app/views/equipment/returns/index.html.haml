@@ -1,9 +1,9 @@
 .page-header
   %h1
-    Equipment Returns
-    %small You can return the equipment you picked up here.
+    = t(:"views.equipment.return.index.heading")
+    %small= t(:"views.equipment.return.index.subheading")
+
 %br
-%h3
-  Picked up Reservations
+%h3= t(:"views.equipment.return.index.reservations")
 
 = render "shared/equipment/reservations_table"

@@ -1,9 +1,8 @@
 .page-header
   %h1
-    Users
-    %small You can change users here.
+    = t(:"views.admin.user.index.heading")
+    %small= t(:"views.admin.user.index.subheading")
 %br
-%h3
-  List of users
+%h3= t(:"views.admin.user.index.list")
 
 = render "users_table"

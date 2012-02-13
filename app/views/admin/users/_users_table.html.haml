@@ -1,12 +1,12 @@
 %table.table.table-bordered
   %thead
     %tr
-      %th Email
-      %th Created At
-      %th Action
+      %th= t(:"views.admin.user._users_table.email")
+      %th= t(:"views.admin.user._users_table.created_at")
+      %th= t(:"views.admin.user._users_table.action")
   %tbody
     - users.each do |user|
       %tr
         %td= user.email
         %td= l user.created_at.in_time_zone("Berlin"), :format => :short
-        %td= link_to "Edit", edit_admin_user_path(user)
+        %td= link_to t(:"views.admin.user._users_table.edit"), edit_admin_user_path(user)

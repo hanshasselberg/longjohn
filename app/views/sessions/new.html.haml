@@ -1,15 +1,15 @@
 %form.form-horizontal{:action => "/sessions", :method => "post"}
   %fieldset
-    %legend Log in
+    %legend= t(:"views.session.new.log_in")
     .control-group
-      %label{for: 'mail'} Email
+      %label{for: 'email'}= t(:"views.session.new.email")
       .controls
         .input
           %input#email{type: 'text', name: 'user[email]'}
     .control-group
-      %label{for: 'password'} Password
+      %label{for: 'password'}= t(:"views.session.new.password")
       .controls
         .input
           %input#password{type: 'password', name: 'user[password]'}
     .form-actions
-      %input.btn-primary{type: 'submit'}
+      %input.btn-primary{type: 'submit', value: t(:"views.session.new.submit")}

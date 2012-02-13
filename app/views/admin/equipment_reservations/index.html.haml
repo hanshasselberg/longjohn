@@ -1,9 +1,8 @@
 .page-header
   %h1
-    EquipmentReservations
-    %small You can change equipment reservations here.
+    = t(:"views.admin.equipment_reservation.index.heading")
+    %small= t(:"views.admin.equipment_reservation.index.subheading")
 %br
-%h3
-  List of equipment reservations
+%h3= t(:"views.admin.equipment_reservation.index.list")
 
 = render "table"

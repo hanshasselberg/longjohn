@@ -1,5 +1,159 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  views:
+    shared:
+      equipment:
+        _reservations_table:
+          name: "Name"
+          from: "From"
+          to: "To"
+      _barcode_scan_form:
+        scan: "Scan"
+    layouts:
+      _navigation:
+        longjohn: "Longjohn"
+        home: "Home"
+        studio:
+          title: "Studio"
+          reservation: "Reservation"
+        equipment:
+          title: "Equipment"
+          reservation: "Reservation"
+          pick_up: "Pick up"
+          return: "Return"
+        project:
+          title: "Project"
+        admin:
+          title: "Admin"
+          user: "User"
+          device: "Device"
+          equipment_reservation: "Equipment reservation"
+        log_out: "Log out"
+        log_in: "Log in"
+        sign_in: "Sign in"
+    session:
+      new:
+        log_in: "Log in"
+        email: "Email"
+        password: "Password"
+        submit: "Submit"
+    user:
+      new:
+        sign_up: "Sign up"
+        email: "Email"
+        password: "Password"
+        submit: "Submit"
+    equipment:
+      reservation:
+        index:
+          heading: "Equipment Reservation"
+          subheading: "You can create new and view existing equipment reservations here."
+          future_reservations: "Future Reservations"
+        show:
+          heading: "Equipment Reservation"
+          subheading: "Yeah, this is it."
+          reserved_devices: "Reserved Devices"
+          kind: "Kind"
+          company: "Company"
+          model: "Model"
+          count: "Count"
+          destroy: "Destroy"
+          pick_up: "Pick Up"
+          back: "Back"
+      pick_up:
+        index:
+          heading: "Equipment Pick Up"
+          subheading: "You can pick up the equipment you reserved here."
+          future_reservations: "Future Reservations"
+        show:
+          heading: "Equipment Pick Up"
+          subheading: "Scan the devices you want, NOW!"
+          error:
+            not_found:
+              title: "Not Found!"
+              desc: "Couldn't find this barcode :(."
+            full:
+              title: "Enough!"
+              desc: "You have enough devices, stop adding."
+            double:
+              title: "Double Scan!"
+              desc: "This barcode was scanned at least twice."
+          devices: "Devices"
+          kind: "Kind"
+          company: "Company"
+          model: "Model"
+          count: "Count"
+          submit: "Submit"
+          return: "Return stuff"
+          back: "Back"
+      return:
+        index:
+          heading: "Equipment Returns"
+          subheading: "You can return the equipment you picked up here."
+          reservations: "Picked up reservations"
+        show:
+          heading: "Equipment Return"
+          subheading: "Scan the devices you want to give back, NOW!"
+          error:
+            not_found:
+              title: "Not Found!"
+              desc: "Couldn't find this barcode :(."
+            double:
+              title: "Double Scan!"
+              desc: "This barcode was scanned at least twice."
+          devices: "Devices"
+          kind: "Kind"
+          company: "Company"
+          model: "Model"
+          count: "Count"
+          submit: "Submit"
+          back: "Back"
+    admin:
+      user:
+        index:
+          heading: "Users"
+          subheading: "You can change users here"
+          list: "List of users"
+        _users_table:
+          email: "Email"
+          created_at: "Created at"
+          action: "Action"
+          edit: "Edit"
+        edit:
+          heading: "User"
+          subheading: "Change the user."
+          kind: "Kind"
+          email: "Email"
+          submit: "Submit"
+      device:
+        index:
+          heading: "Users"
+          subheading: "You can change devices here"
+          list: "List of devices"
+        _table:
+          kind: "Kind"
+          company: "Company"
+          model: "Model"
+          barcode: "Barcode"
+          action: "Action"
+          edit: "Edit"
+          destroy: "Destroy"
+        edit:
+          heading: "Device"
+          subheading: "Change the device."
+          company: "Company"
+          model: "Model"
+          barcode: "Barcode"
+          submit: "Submit"
+      equipment_reservation:
+        index:
+          heading: "Equipment Reservations"
+          subheading: "You can change equipment reservations here"
+          list: "List of equipment reservations"
+        _table:
+          name: "Name"
+          from: "From"
+          to: "To"
+          user: "User"
+          action: "Action"
+          edit: "Edit"
+          destroy: "Destroy"
