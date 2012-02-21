@@ -1,29 +1,6 @@
 .page-header
   %h1
-    = t(:"views.admin.user.edit.heading")
-    %small= t(:"views.admin.user.edit.subheading")
+    = t(:"views.admin.device.edit.heading")
+    %small= t(:"views.admin.device.edit.subheading")
 %br
-= form_for [:admin, device], html: { class: 'form-horizontal' } do |f|
-  %fieldset
-    .control-group
-      = f.label :kind, t(:"views.admin.user.edit.kind")
-      .controls
-        .input
-          = f.text_field :kind
-    .control-group
-      = f.label :company, t(:"views.admin.user.edit.company")
-      .controls
-        .input
-          = f.text_field :company
-    .control-group
-      = f.label :model, t(:"views.admin.user.edit.model")
-      .controls
-        .input
-          = f.text_field :model
-    .control-group
-      = f.label :barcode, t(:"views.admin.user.edit.barcode")
-      .controls
-        .input
-          = f.text_field :barcode
-    .form-actions
-      %input.btn-primary{type: 'submit', value: t(:"views.admin.user.edit.submit")}
+= render 'form'

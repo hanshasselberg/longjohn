@@ -3,6 +3,7 @@
     = t(:"views.admin.device.index.heading")
     %small= t(:"views.admin.device.index.subheading")
 %br
-%h3= t(:"views.admin.device.index.list")
-
+%h3
+  = t(:"views.admin.device.index.list")
+  %small= link_to t(:"views.admin.device.index.new"), new_admin_device_path
 = render "table"

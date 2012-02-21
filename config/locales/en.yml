@@ -128,6 +128,7 @@ en:
           heading: "Devices"
           subheading: "You can change devices here"
           list: "List of devices"
+          new: "New device"
         _table:
           kind: "Kind"
           company: "Company"
@@ -139,6 +140,10 @@ en:
         edit:
           heading: "Device"
           subheading: "Change the device."
+        new:
+          heading: "Device"
+          subheading: "Create a device."
+        _form:
           company: "Company"
           model: "Model"
           barcode: "Barcode"

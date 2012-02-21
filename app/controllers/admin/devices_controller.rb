@@ -4,6 +4,15 @@ class Admin::DevicesController < ApplicationController
   expose(:devices) { Device.all.asc(:kind, :company, :model, :barcode) }
   expose(:device)
 
+  def create
+    if device.save
+      redirect_to admin_devices_path, :notice => ["New!", "You really added that device!"]
+    else
+      flash.now.alert = ["Ooops!", "Something went wrong."]
+      render "new"
+    end
+  end
+
   def update
     if device.save
       redirect_to admin_devices_path, :notice => ["Changed!", "You really changes that device!"]
