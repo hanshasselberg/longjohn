@@ -1,5 +1,5 @@
 class Admin::DevicesController < ApplicationController
-  before_filter :requires_login
+  before_filter :requires_admin
 
   expose(:devices) { Device.all.asc(:kind, :company, :model, :barcode) }
   expose(:device)

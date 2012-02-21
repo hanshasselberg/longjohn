@@ -1,5 +1,5 @@
 class Admin::EquipmentReservationsController < ApplicationController
-  before_filter :requires_login
+  before_filter :requires_admin
 
   expose(:equipment_reservations) { EquipmentReservation.all.asc(:kind, :company, :model, :barcode) }
   expose(:equipment_reservation)

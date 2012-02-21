@@ -10,5 +10,10 @@
       .controls
         .input
           = f.text_field :email
+    .control-group
+      = f.label :admin, t(:"views.admin.user.edit.admin")
+      .controls
+        .input
+          = f.check_box :admin
     .form-actions
       %input.btn-primary{type: 'submit', value: t(:"views.admin.user.edit.submit")}

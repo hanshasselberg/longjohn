@@ -27,7 +27,7 @@
                 = link_to t(:"views.layouts._navigation.equipment.return"), equipment_returns_path
           %li
             %a{href: '#'}= t(:"views.layouts._navigation.project.title")
-          - if current_user.try(:admin?)
+          - if current_user.try(:admin)
             %li.dropdown{class: "#{'active' if controller =~ /^admin/}"}
               %a.dropdown-toggle{href: '#'}= t(:"views.layouts._navigation.admin.title")
               %ul.dropdown-menu

@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     redirect_to log_in_path unless current_user
   end
 
+  def requires_admin
+    redirect_to root_path unless current_user.admin
+  end
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end

@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_filter :requires_login
+  before_filter :requires_admin
 
   expose(:users) { User.all }
   expose(:user)
