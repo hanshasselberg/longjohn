@@ -1,5 +1,6 @@
 class Equipment::PickUpsController < ApplicationController
   before_filter :requires_login
+  before_filter :requires_studio
 
   expose(:equipment_reservation) { EquipmentReservation.find(params[:id]) }
   expose(:pickups) { params[:pickups].split(',').compact.reject(&:blank?) }

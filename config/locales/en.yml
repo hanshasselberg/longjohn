@@ -161,3 +161,10 @@ en:
           action: "Action"
           edit: "Edit"
           destroy: "Destroy"
+      misc:
+        index:
+          heading: "Misc"
+          subheading: "Set different stuff"
+          cookie: "Set cookie to identify studio pc"
+          cookie_explanation: "Setting this cookie invalidates every other cookie."
+          create_cookie: "Create Cookie"

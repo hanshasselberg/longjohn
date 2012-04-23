@@ -1,5 +1,6 @@
 class Equipment::ReturnsController < ApplicationController
   before_filter :requires_login
+  before_filter :requires_studio
 
   expose(:equipment_reservation) { EquipmentReservation.find(params[:id]) }
   expose(:returns) { params[:returns].split(',').compact.reject(&:blank?) }

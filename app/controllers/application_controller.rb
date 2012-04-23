@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   expose(:current_user) { current_user }
 
+  expose(:in_studio?) do
+    (cookies[:studio].present? && cookies[:studio] == REDIS.get("longjohn:studio")) || current_user.try(:admin)
+  end
+
   private
 
   def current_user
@@ -20,7 +24,11 @@ class ApplicationController < ActionController::Base
   end
 
   def requires_admin
-    redirect_to root_path unless current_user.admin
+    redirect_to root_path unless current_user.try(:admin)
+  end
+
+  def requires_studio
+    redirect_to root_path unless in_studio?
   end
 
   def set_locale

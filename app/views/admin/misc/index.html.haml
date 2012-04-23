@@ -1,0 +1,14 @@
+.page-header
+  %h1
+    = t(:"views.admin.misc.index.heading")
+    %small
+      = t(:"views.admin.misc.index.subheading")
+%br
+%h3= t(:"views.admin.misc.index.cookie")
+
+= t(:"views.admin.misc.index.cookie_explanation")
+
+%form{action: "/admin/misc/create_studio_cookie", class: "form-horizontal", method: "post"}
+  %fieldset
+    .form-actions
+      %input.btn-primary{type: 'submit', value: t(:"views.admin.misc.index.create_cookie")}

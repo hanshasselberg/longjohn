@@ -17,6 +17,9 @@ Longjohn::Application.routes.draw do
     resources :equipment_reservations
     resources :users
     resources :devices
+    resources :misc do
+      post :create_studio_cookie, on: :collection
+    end
   end
 
   root :to => 'start#index'

@@ -21,10 +21,11 @@
             %ul.dropdown-menu
               %li
                 = link_to t(:"views.layouts._navigation.equipment.reservation"), equipment_reservations_path
-              %li
-                = link_to t(:"views.layouts._navigation.equipment.pick_up"), equipment_pick_ups_path
-              %li
-                = link_to t(:"views.layouts._navigation.equipment.return"), equipment_returns_path
+              - if in_studio?
+                %li
+                  = link_to t(:"views.layouts._navigation.equipment.pick_up"), equipment_pick_ups_path
+                %li
+                  = link_to t(:"views.layouts._navigation.equipment.return"), equipment_returns_path
           %li
             %a{href: '#'}= t(:"views.layouts._navigation.project.title")
           - if current_user.try(:admin)
@@ -37,6 +38,8 @@
                   = link_to t(:"views.layouts._navigation.admin.device"), admin_devices_path
                 %li
                   = link_to t(:"views.layouts._navigation.admin.equipment_reservation"), admin_equipment_reservations_path
+                %li
+                  = link_to t(:"views.layouts._navigation.admin.misc"), admin_misc_path
         %ul.nav.pull-right
           - if current_user
             %li

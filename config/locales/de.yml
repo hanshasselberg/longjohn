@@ -162,3 +162,10 @@ de:
           action: "Aktion"
           edit: "ändern"
           destroy: "Löschen"
+      misc:
+        index:
+          heading: "Verschiedenes"
+          subheading: "Dies und Das."
+          cookie: "Setze Cookie für den StudioPC"
+          cookie_explanation: "Wenn dieser Cookie gesetzt wird, werden alle anderen ungültig."
+          create_cookie: "Setze Cookie"
