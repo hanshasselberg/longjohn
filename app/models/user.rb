@@ -6,8 +6,6 @@ class User
   field :password_salt, type: String
   field :admin, type: Boolean
 
-  attr_accessible :email, :password, :password_confirmation, :admin
-
   attr_accessor :password
   before_save :encrypt_password
 
