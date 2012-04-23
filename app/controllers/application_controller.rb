@@ -4,13 +4,15 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
 
   expose(:equipment_reservations) do
-    current_user.equipment_reservations.sort_by{ |r| r.from }.map{|r| EquipmentReservationDecorator.new(r)}
+    current_user.equipment_reservations.sort_by{ |r| r.from }.map{ |r| EquipmentReservationDecorator.new(r) }
   end
 
   expose(:current_user) { current_user }
 
+  expose(:is_admin?) { current_user.try(:admin) }
+
   expose(:in_studio?) do
-    (cookies[:studio].present? && cookies[:studio] == REDIS.get("longjohn:studio")) || current_user.try(:admin)
+    (cookies[:studio].present? && cookies[:studio] == REDIS.get("longjohn:studio")) || is_admin?
   end
 
   private
