@@ -2,8 +2,9 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.0'
 
-gem "mongoid", git: "git://github.com/mongoid/mongoid.git"
+gem "mongoid"#, git: "git://github.com/mongoid/mongoid.git"
 gem "bson_ext", "~> 1.5"
+gem "redis"
 
 gem 'decent_exposure'
 gem 'jquery-rails'
@@ -24,13 +25,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem 'rails-i18n'
 
 group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
-
-  gem "capybara"
-  gem "fabrication"
   gem "mocha"
   gem "rspec-rails"
-  gem "spork"
-  gem "watchr"
+  gem "guard-rspec"
 end
