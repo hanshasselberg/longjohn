@@ -10,3 +10,4 @@
         %td= user.email
         %td= l user.created_at.in_time_zone("Berlin"), :format => :short
         %td= link_to t(:"views.admin.user._users_table.edit"), edit_admin_user_path(user)
+        %td= link_to t(:"views.admin.user._users_table.destroy"), admin_user_path(user), method: :delete

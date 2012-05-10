@@ -2,16 +2,13 @@ namespace :csv do
 
   desc 'Import csv'
   task :import => :environment do
-    if ENV.include?("file") && !ENV["file"].blank?
-      File.open(ENV["file"], "r") do |infile|
-        while (line = infile.gets)
-          barcode, model, company, kind = line.split(",")[1,4].map(&:strip)
-          next if kind == "Art"
-          Device.create(
-            barcode: barcode, model: model, company: company, kind: kind
-          )
-        end
-      end
+    File.open("doc/datenbank-digital-hans_new.csv", "r").lines do |line|
+      barcode, model, company, kind = line.split(",")[1,4].map(&:strip)
+      next if kind == "Art"
+      next if barcode == "NULL"
+      Device.create(
+        barcode: barcode, model: model, company: company, kind: kind
+      )
     end
   end
 
