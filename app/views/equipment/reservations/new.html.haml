@@ -7,9 +7,11 @@
 = render "shared/equipment/reservation_line"
 
 %form#new_reservation{:action => "/equipment/reservations", :method => "post"}
+  - from = equipment_reservation.from.in_time_zone.strftime("%d.%m.%Y %H:%M")
+  - to = equipment_reservation.to.in_time_zone.strftime("%d.%m.%Y %H:%M")
   %input{type: 'hidden', name: 'equipment_reservation[name]', value: params[:equipment_reservation][:name]}
-  %input{type: 'hidden', name: 'equipment_reservation[from]', value: params[:equipment_reservation][:from]}
-  %input{type: 'hidden', name: 'equipment_reservation[to]', value: params[:equipment_reservation][:to]}
+  %input{type: 'hidden', name: 'equipment_reservation[from]', value: from, placeholder: to}
+  %input{type: 'hidden', name: 'equipment_reservation[to]', value: to, placeholder: to}
   %input{type: 'hidden', name: 'equipment_reservation[user]', value: current_user._id.to_s}
 
   %h3
