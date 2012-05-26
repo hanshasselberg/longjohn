@@ -6,8 +6,8 @@
 %br
 %form.form-inline{action: new_equipment_reservation_path, method: :get}
   %input{type: 'text', name: 'equipment_reservation[name]', placeholder: 'Name'}
-  - from = (Time.now + 1.day).strftime("%d.%m.%Y %H:%M")
-  - to = (Time.now + 3.days).strftime("%d.%m.%Y %H:%M")
+  - from = (Time.now + 1.day).in_time_zone.strftime("%d.%m.%Y %H:%M")
+  - to = (Time.now + 3.days).in_time_zone.strftime("%d.%m.%Y %H:%M")
   %input{type: 'text', name: 'equipment_reservation[from]', value: from, placeholder: from}
   %input{type: 'text', name: 'equipment_reservation[to]', value: to, placeholder: to}
   %input.btn-primary{type: 'submit', value: 'Proceed'}
