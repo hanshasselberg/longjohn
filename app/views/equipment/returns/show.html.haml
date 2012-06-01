@@ -37,8 +37,6 @@
             = r['returns'].size
           \/
           = r['count']
-          %small
-            = r['pickups'].join(', ')
 %form.return{:action => "/equipment/returns", :method => "post"}
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'returns'}

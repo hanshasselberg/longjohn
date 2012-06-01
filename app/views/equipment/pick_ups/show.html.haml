@@ -39,8 +39,6 @@
             = r['pickups'].size
           \/
           = r['count']
-          %small
-            = model.devices.map(&:barcode).join(', ')
 %form.pick_up{:action => "/equipment/pick_ups", :method => "post"}
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'pickups'}
