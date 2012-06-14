@@ -4,6 +4,16 @@
 
 $ ->
 
+  index_scope = $('#new_reservation')
+
+  $('input:first', index_scope).keyup (e) ->
+    input = $(e.currentTarget)
+    if input.val().length > 0
+      $('input.btn-primary', index_scope).removeAttr('disabled')
+    else
+      $('input.btn-primary', index_scope).attr('disabled', 'disabled')
+
+
   scope = $('#available_models')
 
   $('tr.kind', scope).click (e) ->
