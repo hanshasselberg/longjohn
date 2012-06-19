@@ -29,11 +29,8 @@ class Model
     Model.all.tap do |models|
       EquipmentReservation.in(from, to).each do |reservation|
         reservation.reservations.each do |r|
-          models
-            .find{|model| model.equal_to_reservation(r) }
-            .tap do |model|
-              model.apply_reservation(r, reservation.user)
-          end
+          model = models.find{|model| model.equal_to_reservation(r) }
+          model.apply_reservation(r, reservation.user) if model
         end
       end
     end
