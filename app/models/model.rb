@@ -33,7 +33,7 @@ class Model
           model.apply_reservation(r, reservation.user) if model
         end
       end
-    end
+    end.compact
   end
 
   def devices
