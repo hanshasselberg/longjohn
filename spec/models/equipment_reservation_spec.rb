@@ -301,4 +301,40 @@ describe EquipmentReservation do
       end
     end
   end
+
+  describe "#delete_remaining" do
+    let!(:device_one) { Device.create(kind: 'A', company: 'B', model: 'C', barcode: '$barcode1$') }
+    let!(:device_two) { Device.create(kind: 'D', company: 'E', model: 'F', barcode: '$barcode2$') }
+    let(:reservation_entry_one) do
+      {
+        'count' => 1,
+        'model' => device_one.model,
+        'company' => device_one.company,
+        'kind' => device_one.kind,
+        'pickups' => [device_one.barcode],
+        'returns' => []
+      }
+    end
+    let(:reservation_entry_two) do
+      {
+        'count' => 1,
+        'model' => device_two.model,
+        'company' => device_two.company,
+        'kind' => device_two.kind,
+        'pickups' => [],
+        'returns' => []
+      }
+    end
+    let(:reservation) do
+      EquipmentReservation.new(reservations: [reservation_entry_one, reservation_entry_two])
+    end
+
+    context "when not all reservations are picked up" do
+      before { reservation.delete_remaining }
+
+      it "deletes the not picked up" do
+        reservation.reservations.should have(1).items
+      end
+    end
+  end
 end

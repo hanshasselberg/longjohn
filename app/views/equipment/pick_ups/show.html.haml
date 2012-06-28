@@ -43,6 +43,8 @@
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'pickups'}
   %input.btn-primary{type: 'submit', value: t(:"views.equipment.pick_up.show.submit")}
+  %a{href: delete_remaining_equipment_pick_up_path(equipment_reservation)}
+    = t(:"views.equipment.pick_up.show.delete_remaining")
   %a{href: equipment_return_path(equipment_reservation)}
     = t(:"views.equipment.pick_up.show.return")
   %a{href: equipment_pick_ups_path}

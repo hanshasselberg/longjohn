@@ -9,7 +9,11 @@ Longjohn::Application.routes.draw do
 
   namespace :equipment do
     resources :reservations
-    resources :pick_ups
+    resources :pick_ups do
+      member do
+        get :delete_remaining
+      end
+    end
     resources :returns
   end
 

@@ -52,6 +52,15 @@ class EquipmentReservation
     end
   end
 
+  def delete_remaining
+    reservations.each do |r|
+      r['count'] = r['pickups'].size
+    end
+    reservations.delete_if do |r|
+      r['count'] == 0
+    end
+  end
+
   def pickup_warning
     return false if pickups_count <= 0
     reservations_count > pickups_count

@@ -85,6 +85,7 @@ en:
           submit: "Submit"
           return: "Return stuff"
           back: "Back"
+          delete_remaining: "Delete Remaining"
       return:
         index:
           heading: "Equipment Returns"

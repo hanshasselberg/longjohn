@@ -14,4 +14,13 @@ class Equipment::PickUpsController < ApplicationController
       render 'show', id: equipment_reservation._id, alert: [ "Mh", "Didn't work out!"]
     end
   end
+
+  def delete_remaining
+    equipment_reservation.delete_remaining
+    if equipment_reservation.save
+      render 'show', id: equipment_reservation._id, notice: [ "Cool.", "Not used reservations deleted."]
+    else
+      render 'show', id: equipment_reservation._id, alert: [ "Aww..", "Couldn't delete."]
+    end
+  end
 end

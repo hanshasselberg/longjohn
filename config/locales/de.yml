@@ -85,6 +85,7 @@ de:
           submit: "Speichern"
           return: "Rückgabe"
           back: "zurück"
+          delete_remaining: "Übrige löschen"
       return:
         index:
           heading: "Geräterückgabe"
