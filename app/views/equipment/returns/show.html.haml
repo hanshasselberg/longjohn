@@ -15,7 +15,8 @@
 
 %br
 
-= render "shared/barcode_scan_form"
+%span.returns
+  = render "shared/barcode_scan_form"
 
 %h3= t(:"views.equipment.return.show.devices")
 %table.table.table-bordered
@@ -37,6 +38,15 @@
             = r['returns'].size
           \/
           = r['count']
+    - (all_equipment_reservations - [equipment_reservation]).flat_map(&:reservations).each do |r|
+      - model = models.find{ |model| model.kind == r['kind'] && model.company == r['company'] && model.model == r['model'] }
+      %tr.hidden{data: {barcodes: model.devices.map(&:barcode), picked: r['pickups'], total: r['count'], returned: r['returns']}}
+        %td= model.kind
+        %td= model.company
+        %td= model.model
+        %td
+          %span.count
+            0
 %form.return{:action => "/equipment/returns", :method => "post"}
   %input{type: 'hidden', name: :id, value: equipment_reservation._id.to_s}
   %input#device_barcodes{type: 'hidden', name: 'returns'}
